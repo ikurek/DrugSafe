@@ -1,15 +1,13 @@
 package com.ikurek.drugsafe.mydrugs
 
-import android.app.Dialog
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.di.components.DaggerFragmentComponent
 import com.ikurek.drugsafe.di.modules.FragmentModule
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 /**
@@ -18,7 +16,7 @@ import javax.inject.Inject
 class MyDrugsFragment : Fragment(), MyDrugsContract.View {
 
     @Inject
-    lateinit var presenter : MyDrugsContract.Presenter
+    lateinit var presenter: MyDrugsContract.Presenter
 
     private fun injectDependencies() {
         DaggerFragmentComponent.builder()
@@ -53,7 +51,6 @@ class MyDrugsFragment : Fragment(), MyDrugsContract.View {
 
     override fun setItems(items: List<String>) {
     }
-
 
 
 }

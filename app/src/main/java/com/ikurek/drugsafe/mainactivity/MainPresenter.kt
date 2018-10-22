@@ -1,13 +1,10 @@
 package com.ikurek.drugsafe.mainactivity
 
-import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
-import androidx.core.view.GravityCompat
 import android.view.MenuItem
+import com.google.android.material.navigation.NavigationView
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.mydrugs.MyDrugsFragment
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsFragment
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSelectedListener {
 

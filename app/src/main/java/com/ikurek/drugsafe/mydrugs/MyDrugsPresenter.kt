@@ -1,8 +1,5 @@
 package com.ikurek.drugsafe.mydrugs
 
-import android.content.Context
-import javax.inject.Inject
-
 class MyDrugsPresenter : MyDrugsContract.Presenter {
 
     var view: MyDrugsContract.View? = null

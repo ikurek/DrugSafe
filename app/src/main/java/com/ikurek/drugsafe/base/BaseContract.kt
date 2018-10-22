@@ -1,7 +1,5 @@
 package com.ikurek.drugsafe.base
 
-import android.app.Dialog
-
 /**
  * Base for Contract classes
  * Contains interfaces for both
@@ -15,6 +13,5 @@ class BaseContract {
         fun detach()
     }
 
-    interface View {
-    }
+    interface View
 }

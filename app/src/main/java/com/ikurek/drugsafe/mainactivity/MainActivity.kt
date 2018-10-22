@@ -1,25 +1,16 @@
 package com.ikurek.drugsafe.mainactivity
 
-import android.app.Dialog
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.fragment.app.Fragment
-import androidx.core.view.GravityCompat
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.di.components.DaggerActivityComponent
 import com.ikurek.drugsafe.di.modules.ActivityModule
-import com.ikurek.drugsafe.mydrugs.MyDrugsFragment
-import dagger.android.DaggerActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -75,16 +66,22 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun changeFragment(fragment: Fragment, tag: String) {
         supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_frame, fragment)
-                .addToBackStack(tag)
-                .commit()
+            .replace(R.id.fragment_frame, fragment)
+            .addToBackStack(tag)
+            .commit()
         updateToolbarByFragmentTag(tag)
         updateNavigationViewByFragmentTag(tag)
         updateFloatingActionButtonByFragmentTag(tag)
     }
 
     override fun setupNavigationDrawer() {
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        val toggle = ActionBarDrawerToggle(
+            this,
+            drawer_layout,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         nav_view.setCheckedItem(R.id.nav_my_drugs)
@@ -96,21 +93,21 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun updateToolbarByFragmentTag(tag: String) {
-        when(tag) {
+        when (tag) {
             "MyDrugsFragment" -> toolbar.title = getString(R.string.my_drugs)
             "SearchDrugsFragment" -> toolbar.title = getString(R.string.search_drugs)
         }
     }
 
     override fun updateNavigationViewByFragmentTag(tag: String) {
-        when(tag) {
+        when (tag) {
             "MyDrugsFragment" -> nav_view.setCheckedItem(R.id.nav_my_drugs)
             "SearchDrugsFragment" -> nav_view.setCheckedItem(R.id.nav_search_drugs)
         }
     }
 
     override fun updateFloatingActionButtonByFragmentTag(tag: String) {
-        when(tag) {
+        when (tag) {
             "MyDrugsFragment" -> fab.show()
             "SearchDrugsFragment" -> fab.hide()
         }

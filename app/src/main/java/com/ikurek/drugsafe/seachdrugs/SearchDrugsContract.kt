@@ -9,7 +9,7 @@ interface SearchDrugsContract {
         fun onItemClicked()
     }
 
-    interface View: BaseContract.View {
+    interface View : BaseContract.View {
         fun showProgress()
         fun hideProgress()
         fun setItems(items: List<String>)

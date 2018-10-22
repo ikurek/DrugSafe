@@ -1,6 +1,5 @@
 package com.ikurek.drugsafe.di.components
 
-import android.app.Activity
 import com.ikurek.drugsafe.di.modules.ActivityModule
 import com.ikurek.drugsafe.mainactivity.MainActivity
 import dagger.Component

@@ -1,7 +1,7 @@
 package com.ikurek.drugsafe.mainactivity
 
-import com.google.android.material.navigation.NavigationView
 import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
 import com.ikurek.drugsafe.base.BaseContract
 
 interface MainContract {
@@ -10,7 +10,7 @@ interface MainContract {
         fun handleFloatingActionButton()
     }
 
-    interface View: BaseContract.View {
+    interface View : BaseContract.View {
         fun openDrawer()
         fun closeDrawer()
         fun drawerIsOpen(): Boolean
