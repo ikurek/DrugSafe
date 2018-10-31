@@ -9,4 +9,26 @@
     <string name="search_drugs">Search drugs</string>
     <string name="dialog_exit_title">Close DrugSafe</string>
     <string name="dialog_exit_body">Are You sure You want to quit?</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Field names -->
+    <string name="registration">Registration</string>
+    <string name="register">Register</string>
+    <string name="signin">Sign in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat password</string>
+
+    <!-- Success strings -->
+    <string name="success_registration">You have registered successfully. You can now log in.</string>
+
+    <!-- Error strings -->
+    <string name="error">Error</string>
+    <string name="error_email_invalid">Email address is invalid</string>
+    <string name="error_password_too_short">Password is too short</string>
+    <string name="error_password_incorrect">Password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="error_email_taken">This email address is already taken</string>
+    <string name="error_server_offline">Server is currently offline, please try again later</string>
+    <string name="error_passwords_do_not_match">Passwords do not match</string>
 </resources>

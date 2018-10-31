@@ -2,6 +2,7 @@ package com.ikurek.drugsafe.di.components
 
 import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.di.modules.ApplicationModule
+import com.ikurek.drugsafe.loginactivity.LoginContract
 import dagger.Component
 
 /**
@@ -12,5 +13,6 @@ import dagger.Component
 interface ApplicationComponent {
 
     fun inject(application: BaseApp)
+    fun inject(presenter: LoginContract.Presenter)
 
 }
