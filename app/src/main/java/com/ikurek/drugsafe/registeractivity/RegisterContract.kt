@@ -19,5 +19,6 @@ interface RegisterContract {
         fun showProgressIndicator()
         fun hideProgressIndicator()
         fun getWindowToken(): IBinder
+        fun showConnectionFailedDialog()
     }
 }

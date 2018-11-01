@@ -1,12 +1,16 @@
 package com.ikurek.drugsafe.base
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
-import com.ikurek.drugsafe.api.ApiInterface
+import com.ikurek.drugsafe.api.DrugsApi
+import com.ikurek.drugsafe.api.UsersApi
 import com.ikurek.drugsafe.di.components.*
-import com.ikurek.drugsafe.di.modules.ActivityModule
 import com.ikurek.drugsafe.di.modules.ApiModule
 import com.ikurek.drugsafe.di.modules.ContextModule
+import com.ikurek.drugsafe.di.modules.PresenterModule
+import com.ikurek.drugsafe.di.modules.SharedPreferencesModule
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -17,44 +21,52 @@ class BaseApp : Application() {
     companion object {
         lateinit var presenterComponent: PresenterComponent
         lateinit var activityComponent: ActivityComponent
-        lateinit var apiComponent: ApiComponent
-
-        fun getDaggerPresenterComponent() = presenterComponent
-        fun getDaggerActivityComponent() = activityComponent
-        fun getDaggerApiComponent() = apiComponent
-
+        lateinit var fragmentComponent: FragmentComponent
     }
 
-    lateinit var api: ApiInterface
+    lateinit var usersApi: UsersApi
+    lateinit var drugsApi: DrugsApi
+    lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onCreate() {
         super.onCreate()
         Log.e("BaseApp", "Running")
         buildRetrofit()
+        buildSharedPreferences()
         buildDagger()
     }
 
     private fun buildDagger() {
         presenterComponent = DaggerPresenterComponent.builder()
                 .contextModule(ContextModule(applicationContext))
-                .apiModule(ApiModule(api))
+            .apiModule(ApiModule(usersApi, drugsApi))
+            .sharedPreferencesModule(SharedPreferencesModule(sharedPreferences))
                 .build()
         activityComponent = DaggerActivityComponent.builder()
-                .activityModule(ActivityModule())
+            .contextModule(ContextModule(applicationContext))
+            .presenterModule(PresenterModule())
+            .sharedPreferencesModule(SharedPreferencesModule(sharedPreferences))
                 .build()
-        apiComponent = DaggerApiComponent.builder()
-                .apiModule(ApiModule(api))
-                .contextModule(ContextModule(applicationContext))
-                .build()
+        fragmentComponent = DaggerFragmentComponent.builder()
+            .contextModule(ContextModule(applicationContext))
+            .presenterModule(PresenterModule())
+            .build()
+
     }
 
     private fun buildRetrofit() {
         val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://igor-server.ikurek.p5.tiktalik.io:8080/api/v1/")
+            .baseUrl("https://ikurek.pl:8444")
                 .build()
 
-        api = retrofit.create(ApiInterface::class.java)
+        usersApi = retrofit.create(UsersApi::class.java)
+        drugsApi = retrofit.create(DrugsApi::class.java)
+    }
+
+    private fun buildSharedPreferences() {
+        sharedPreferences = applicationContext.getSharedPreferences("drugsafesp", Context.MODE_PRIVATE)
     }
 
 

@@ -2,11 +2,11 @@ package com.ikurek.drugsafe.loginactivity
 
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-import com.ikurek.drugsafe.api.ApiInterface
+import com.ikurek.drugsafe.R
+import com.ikurek.drugsafe.api.UsersApi
 import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.model.LoginModel
 import retrofit2.Call
@@ -19,10 +19,13 @@ class LoginPresenter : LoginContract.Presenter {
     var view: LoginContract.View? = null
 
     @Inject
-    lateinit var apiInterface: ApiInterface
+    lateinit var usersApi: UsersApi
 
     @Inject
     lateinit var context: Context
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun attach(view: LoginContract.View) {
         this.view = view
@@ -41,27 +44,34 @@ class LoginPresenter : LoginContract.Presenter {
         //Show progress
         view?.showProgressIndicator()
 
-        // FIXME: Validate
-        val json: JsonObject = JsonParser().parse("{\"email\": \"$email\", \"password\": \"$password\" }").asJsonObject
-
         // Make API call
-        apiInterface.login(json).enqueue(object : Callback<LoginModel> {
-            override fun onFailure(call: Call<LoginModel>, e: Throwable) {
-                Log.e("Login", "Login failed. Cause: $e")
+        usersApi.login(LoginModel(email, password)).enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, e: Throwable) {
+                Log.e("Login", "Failed. Cause: $e")
+
+                // Show info
                 view?.hideProgressIndicator()
-                view?.showServerOfflineDialog()
+                view?.showConnectionFailedDialog()
             }
 
-            override fun onResponse(call: Call<LoginModel>, response: Response<LoginModel>) {
-                Log.d("Login", "Success. token is ${response.raw().headers()}")
-
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 view?.hideProgressIndicator()
 
                 when (response.code()) {
                     200 -> {
-                        TODO("Not yet implemented")
+                        val token: String? = response.headers()["Authorization"]
+                        if (token != null) {
+                            Log.d("Login", "Auth token ok")
+                            saveAuthDataInSharedPreferences(token, email)
+                            view?.startMainActivity()
+                        } else {
+                            Log.d("Login", "Auth token is null")
+                            view?.showInternalServerErrorDialog()
+                        }
                     }
+                    403 -> view?.showIncorrectPasswordEmailCombinationDialog()
                     404 -> view?.showServerOfflineDialog()
+                    else -> view?.showInternalServerErrorDialog()
                 }
             }
         })
@@ -69,5 +79,12 @@ class LoginPresenter : LoginContract.Presenter {
 
     override fun handleRegisterButton() {
         view?.startRegisterActivity()
+    }
+
+    private fun saveAuthDataInSharedPreferences(token: String, email: String) {
+        sharedPreferences.edit()
+            .putString(context.getString(R.string.sp_key_auth_token), token)
+            .putString(context.getString(R.string.sp_key_user_email), email)
+            .apply()
     }
 }

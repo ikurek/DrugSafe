@@ -1,5 +1,6 @@
 package com.ikurek.drugsafe.model
 
 data class LoginModel(
-        var id: Long?
+        var email: String?,
+        var password: String?
 )

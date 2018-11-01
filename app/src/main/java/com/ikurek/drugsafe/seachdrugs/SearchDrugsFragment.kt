@@ -6,21 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ikurek.drugsafe.R
-import com.ikurek.drugsafe.di.components.DaggerFragmentComponent
-import com.ikurek.drugsafe.di.modules.FragmentModule
+import com.ikurek.drugsafe.base.BaseApp
 import javax.inject.Inject
 
 class SearchDrugsFragment : Fragment(), SearchDrugsContract.View {
 
     @Inject
     lateinit var presenter: SearchDrugsContract.Presenter
-
-    private fun injectDependencies() {
-        DaggerFragmentComponent.builder()
-            .fragmentModule(FragmentModule())
-            .build()
-            .inject(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +23,7 @@ class SearchDrugsFragment : Fragment(), SearchDrugsContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        injectDependencies()
+        BaseApp.fragmentComponent.inject(this)
         presenter.attach(this)
     }
 

@@ -11,6 +11,10 @@
     <string name="dialog_exit_body">Are You sure You want to quit?</string>
     <string name="title_activity_login">Sign in</string>
 
+    <!-- SharedPreferences Keys -->
+    <string name="sp_key_auth_token" translatable="false">auth_token</string>
+    <string name="sp_key_user_email" translatable="false">user_email</string>
+
     <!-- Field names -->
     <string name="registration">Registration</string>
     <string name="register">Register</string>
@@ -26,9 +30,14 @@
     <string name="error">Error</string>
     <string name="error_email_invalid">Email address is invalid</string>
     <string name="error_password_too_short">Password is too short</string>
-    <string name="error_password_incorrect">Password is incorrect</string>
+    <string name="error_password_email_not_matching">Password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="error_email_taken">This email address is already taken</string>
-    <string name="error_server_offline">Server is currently offline, please try again later</string>
-    <string name="error_passwords_do_not_match">Passwords do not match</string>
+    <string name="error_email_taken">This email address is already taken. If it is Yours, try logging in.</string>
+    <string name="error_server_offline">Server is currently offline, please try again later.</string>
+    <string name="error_passwords_do_not_match">Email and password do not match. If You do not have an account, register
+        first.
+    </string>
+    <string name="error_connection_failed">Connecting to server failed. Check Your internet connection and try again.
+    </string>
+    <string name="error_internal_server_error">An internal server error has occurred. Please try again.</string>
 </resources>

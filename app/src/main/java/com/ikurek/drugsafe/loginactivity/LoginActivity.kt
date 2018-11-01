@@ -1,6 +1,7 @@
 package com.ikurek.drugsafe.loginactivity
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.IBinder
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
+import com.ikurek.drugsafe.mainactivity.MainActivity
 import com.ikurek.drugsafe.registeractivity.RegisterActivity
 import com.ikurek.drugsafe.utlis.Validators
 import kotlinx.android.synthetic.main.activity_login.*
@@ -21,13 +23,24 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     @Inject
     lateinit var presenter: LoginContract.Presenter
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        title = getString(R.string.signin)
         BaseApp.activityComponent.inject(this)
-        presenter.attach(this)
-        bindHandlers()
+
+        // If token is saved, just start MainActivity
+        // Else, show login screen
+        if (sharedPreferences.getString(this.getString(R.string.sp_key_auth_token), null) != null) {
+            startMainActivity()
+        } else {
+            setContentView(R.layout.activity_login)
+            title = getString(R.string.signin)
+            presenter.attach(this)
+            bindHandlers()
+        }
+        
     }
 
     override fun bindHandlers() {
@@ -41,6 +54,11 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         startActivity(Intent(this, RegisterActivity::class.java))
     }
 
+    override fun startMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        this.finish()
+    }
+
     override fun showServerOfflineDialog() {
         MaterialDialog(this).apply {
             title(R.string.error)
@@ -49,10 +67,26 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         }.show()
     }
 
-    override fun showIncorrectPasswordDialog() {
+    override fun showIncorrectPasswordEmailCombinationDialog() {
         MaterialDialog(this).apply {
             title(R.string.error)
-            message(R.string.success_registration)
+            message(R.string.error_password_email_not_matching)
+            positiveButton { this.dismiss() }
+        }.show()
+    }
+
+    override fun showConnectionFailedDialog() {
+        MaterialDialog(this).apply {
+            title(R.string.error)
+            message(R.string.error_connection_failed)
+            positiveButton { this.dismiss() }
+        }.show()
+    }
+
+    override fun showInternalServerErrorDialog() {
+        MaterialDialog(this).apply {
+            title(R.string.error)
+            message(R.string.error_internal_server_error)
             positiveButton { this.dismiss() }
         }.show()
     }

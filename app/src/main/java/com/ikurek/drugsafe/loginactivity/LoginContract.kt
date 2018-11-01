@@ -18,7 +18,10 @@ interface LoginContract {
         fun getWindowToken(): IBinder
         fun hideProgressIndicator()
         fun showProgressIndicator()
-        fun showIncorrectPasswordDialog()
+        fun showIncorrectPasswordEmailCombinationDialog()
         fun showServerOfflineDialog()
+        fun showConnectionFailedDialog()
+        fun showInternalServerErrorDialog()
+        fun startMainActivity()
     }
 }

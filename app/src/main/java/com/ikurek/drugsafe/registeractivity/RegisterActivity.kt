@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.ikurek.drugsafe.R
-import com.ikurek.drugsafe.di.components.DaggerActivityComponent
-import com.ikurek.drugsafe.di.modules.ActivityModule
+import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.utlis.Validators
 import kotlinx.android.synthetic.main.activity_register.*
 import javax.inject.Inject
@@ -18,24 +17,21 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
     @Inject
     lateinit var presenter: RegisterContract.Presenter
 
-    private fun injectDependencies() {
-        DaggerActivityComponent.builder()
-                .activityModule(ActivityModule())
-                .build()
-                .inject(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        injectDependencies()
+        BaseApp.activityComponent.inject(this)
         presenter.attach(this)
         bindHandlers()
     }
 
     override fun bindHandlers() {
         register_button.setOnClickListener {
-            if (areRequiredFieldsValid()) presenter.handleRegisterButton(email_text.text.toString(), password_text.toString(), repeat_password_text.text.toString())
+            if (areRequiredFieldsValid()) presenter.handleRegisterButton(
+                email_text.text.toString(),
+                password_text.text.toString(),
+                repeat_password_text.text.toString()
+            )
         }
     }
 
@@ -43,7 +39,7 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         MaterialDialog(this).apply {
             title(R.string.error)
             message(R.string.error_email_taken)
-            this.dismiss()
+            positiveButton { this.dismiss() }
         }.show()
     }
 
@@ -59,8 +55,21 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
         MaterialDialog(this).apply {
             title(R.string.registration)
             message(R.string.success_registration)
+            positiveButton {
+                it.dismiss()
+                it.ownerActivity?.finish()
+            }
+            onDismiss {
+                it.ownerActivity?.finish()
+            }
+        }.show()
+    }
+
+    override fun showConnectionFailedDialog() {
+        MaterialDialog(this).apply {
+            title(R.string.error)
+            message(R.string.error_connection_failed)
             positiveButton { this.dismiss() }
-            onDismiss { this.ownerActivity?.finish() }
         }.show()
     }
 

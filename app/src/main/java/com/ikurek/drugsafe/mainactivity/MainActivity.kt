@@ -7,8 +7,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.ikurek.drugsafe.R
-import com.ikurek.drugsafe.di.components.DaggerActivityComponent
-import com.ikurek.drugsafe.di.modules.ActivityModule
+import com.ikurek.drugsafe.base.BaseApp
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import javax.inject.Inject
@@ -18,18 +17,11 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     @Inject
     lateinit var presenter: MainContract.Presenter
 
-    private fun injectDependencies() {
-        DaggerActivityComponent.builder()
-            .activityModule(ActivityModule())
-            .build()
-            .inject(this)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        injectDependencies()
+        BaseApp.activityComponent.inject(this)
         setupNavigationDrawer()
         setupFloatingActionButton()
         presenter.attach(this)

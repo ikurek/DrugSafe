@@ -3,11 +3,9 @@ package com.ikurek.drugsafe.registeractivity
 import android.content.Context
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-import com.ikurek.drugsafe.api.ApiInterface
+import com.ikurek.drugsafe.api.UsersApi
 import com.ikurek.drugsafe.base.BaseApp
-import com.ikurek.drugsafe.model.RegisterModel
+import com.ikurek.drugsafe.model.LoginModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +16,7 @@ class RegisterPresenter : RegisterContract.Presenter {
     var view: RegisterContract.View? = null
 
     @Inject
-    lateinit var apiInterface: ApiInterface
+    lateinit var usersApi: UsersApi
 
     @Inject
     lateinit var context: Context
@@ -41,22 +39,19 @@ class RegisterPresenter : RegisterContract.Presenter {
         //Show progress
         view?.showProgressIndicator()
 
-        // FIXME: Validate
-        val json: JsonObject = JsonParser().parse("{\"email\": \"$email\", \"password\": \"$password\" }").asJsonObject
-
         // Make API call
-        apiInterface.register(json).enqueue(object : Callback<RegisterModel> {
+        usersApi.register(LoginModel(email, password)).enqueue(object : Callback<Void> {
 
-            override fun onFailure(call: Call<RegisterModel>, e: Throwable) {
-                Log.e("Register Request", "Failed. Cause: $e")
+            override fun onFailure(call: Call<Void>, e: Throwable) {
+                Log.e("Register", "Failed. Cause: $e")
 
                 view?.hideProgressIndicator()
-                view?.showServerOfflineDialog()
+                view?.showConnectionFailedDialog()
 
             }
 
-            override fun onResponse(call: Call<RegisterModel>, response: Response<RegisterModel>) {
-                Log.d("Register Request", "Success. Response: ${response.body()}, ${response.raw().body()}, ${response.message()}")
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                Log.d("Register", "Success, code is ${response.code()}")
 
                 view?.hideProgressIndicator()
 
