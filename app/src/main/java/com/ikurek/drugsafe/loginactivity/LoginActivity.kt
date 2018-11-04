@@ -33,6 +33,8 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         // If token is saved, just start MainActivity
         // Else, show login screen
         if (sharedPreferences.getString(this.getString(R.string.sp_key_auth_token), null) != null) {
+            // Null starting tag in case it left from previous session
+            BaseApp.currentlyVisibleFragmentTag = ""
             startMainActivity()
         } else {
             setContentView(R.layout.activity_login)
@@ -40,7 +42,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             presenter.attach(this)
             bindHandlers()
         }
-        
+
     }
 
     override fun bindHandlers() {
@@ -56,7 +58,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun startMainActivity() {
         startActivity(Intent(this, MainActivity::class.java))
-        this.finish()
+        this.finishAffinity()
     }
 
     override fun showServerOfflineDialog() {

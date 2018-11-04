@@ -22,6 +22,7 @@ class BaseApp : Application() {
         lateinit var presenterComponent: PresenterComponent
         lateinit var activityComponent: ActivityComponent
         lateinit var fragmentComponent: FragmentComponent
+        var currentlyVisibleFragmentTag: String = ""
     }
 
     lateinit var usersApi: UsersApi

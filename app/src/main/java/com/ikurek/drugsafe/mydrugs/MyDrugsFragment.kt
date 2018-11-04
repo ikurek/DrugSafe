@@ -35,6 +35,11 @@ class MyDrugsFragment : Fragment(), MyDrugsContract.View {
         presenter.detach()
     }
 
+    override fun onStart() {
+        super.onStart()
+        BaseApp.currentlyVisibleFragmentTag = getString(R.string.fragment_tag_mydrugs)
+    }
+
     override fun showProgress() {
     }
 

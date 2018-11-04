@@ -10,6 +10,11 @@
     <string name="dialog_exit_title">Close DrugSafe</string>
     <string name="dialog_exit_body">Are You sure You want to quit?</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="search_drug_or_substance">Search for drug or substance</string>
+
+    <!-- Fragment tags -->
+    <string name="fragment_tag_mydrugs" translatable="false">MyDrugsFragment</string>
+    <string name="fragment_tag_searchdrugs" translatable="false">SearchDrugsFragment</string>
 
     <!-- SharedPreferences Keys -->
     <string name="sp_key_auth_token" translatable="false">auth_token</string>

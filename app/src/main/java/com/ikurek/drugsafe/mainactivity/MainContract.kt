@@ -14,12 +14,10 @@ interface MainContract {
         fun openDrawer()
         fun closeDrawer()
         fun drawerIsOpen(): Boolean
-        fun changeFragment(fragment: Fragment, tag: String)
+        fun changeFragment(fragment: Fragment, tag: String, addToBackstack: Boolean)
         fun setupNavigationDrawer()
         fun setupFloatingActionButton()
-        fun updateToolbarByFragmentTag(tag: String)
-        fun updateNavigationViewByFragmentTag(tag: String)
-        fun updateFloatingActionButtonByFragmentTag(tag: String)
         fun showExitDialog()
+        fun updateMainActivityUIByCurrentFragmentTag()
     }
 }

@@ -32,6 +32,11 @@ class SearchDrugsFragment : Fragment(), SearchDrugsContract.View {
         presenter.detach()
     }
 
+    override fun onStart() {
+        super.onStart()
+        BaseApp.currentlyVisibleFragmentTag = getString(R.string.fragment_tag_searchdrugs)
+    }
+
     override fun showProgress() {
     }
 

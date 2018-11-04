@@ -6,7 +6,9 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context=".loginactivity.LoginActivity" android:id="@+id/login_layout">
+    android:id="@+id/login_layout"
+    android:animateLayoutChanges="true"
+    tools:context=".loginactivity.LoginActivity">
 
     <!-- Login progress -->
 

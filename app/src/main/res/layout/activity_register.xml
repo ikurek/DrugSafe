@@ -5,7 +5,8 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
                                                    tools:context=".registeractivity.RegisterActivity"
-                                                   android:id="@+id/register_layout">
+    android:id="@+id/register_layout"
+    android:animateLayoutChanges="true">
 
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_input_layout"
