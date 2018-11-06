@@ -16,4 +16,8 @@ object Validators {
         return password.equals(repeatPassword)
     }
 
+    fun isDrugQueryValid(query: String): Boolean {
+        return query.trim().length >= 3
+    }
+
 }

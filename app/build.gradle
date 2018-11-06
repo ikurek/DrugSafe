@@ -19,6 +19,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -42,6 +45,9 @@ dependencies {
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
     implementation "com.squareup.retrofit2:converter-gson:2.4.0"
+
+    // Data Binding
+    kapt "com.android.databinding:compiler:$gradle_version"
 
     // Tests
     testImplementation 'junit:junit:4.12'

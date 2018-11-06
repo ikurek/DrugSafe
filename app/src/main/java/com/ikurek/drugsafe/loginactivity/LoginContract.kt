@@ -13,7 +13,6 @@ interface LoginContract {
     }
 
     interface View : BaseContract.View {
-        fun bindHandlers()
         fun startRegisterActivity()
         fun getWindowToken(): IBinder
         fun hideProgressIndicator()

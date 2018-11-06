@@ -45,12 +45,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     }
 
-    override fun bindHandlers() {
-        login_button.setOnClickListener {
-            if (areRequiredFieldsValid()) presenter.handleLoginButton(email_text.text.toString(), password_text.text.toString())
-        }
-        goto_register_button.setOnClickListener { presenter.handleRegisterButton() }
-    }
+
 
     override fun startRegisterActivity() {
         startActivity(Intent(this, RegisterActivity::class.java))
@@ -105,6 +100,20 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         goto_register_button.visibility = View.VISIBLE
     }
 
+    override fun getWindowToken(): IBinder {
+        return login_layout.windowToken
+    }
+
+    private fun bindHandlers() {
+        login_button.setOnClickListener {
+            if (areRequiredFieldsValid()) presenter.handleLoginButton(
+                email_text.text.toString(),
+                password_text.text.toString()
+            )
+        }
+        goto_register_button.setOnClickListener { presenter.handleRegisterButton() }
+    }
+
     private fun areRequiredFieldsValid(): Boolean {
         if (!Validators.isEmailValid(email_text.text.toString())) {
             email_input_layout.error = getString(R.string.error_email_invalid)
@@ -123,7 +132,5 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         return true
     }
 
-    override fun getWindowToken(): IBinder {
-        return login_layout.windowToken
-    }
+
 }

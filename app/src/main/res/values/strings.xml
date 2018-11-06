@@ -11,6 +11,7 @@
     <string name="dialog_exit_body">Are You sure You want to quit?</string>
     <string name="title_activity_login">Sign in</string>
     <string name="search_drug_or_substance">Search for drug or substance</string>
+    <string name="type_drug_or_substance_first">Type a name or substance to search drugs database</string>
 
     <!-- Fragment tags -->
     <string name="fragment_tag_mydrugs" translatable="false">MyDrugsFragment</string>
@@ -45,4 +46,6 @@
     <string name="error_connection_failed">Connecting to server failed. Check Your internet connection and try again.
     </string>
     <string name="error_internal_server_error">An internal server error has occurred. Please try again.</string>
+    <string name="error_drug_query_too_short">Please enter at least 3 characters</string>
+    <string name="error_no_drugs_found">No drugs found</string>
 </resources>
