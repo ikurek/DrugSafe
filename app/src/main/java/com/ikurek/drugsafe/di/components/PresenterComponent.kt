@@ -3,6 +3,7 @@ package com.ikurek.drugsafe.di.components
 import com.ikurek.drugsafe.di.modules.ApiModule
 import com.ikurek.drugsafe.di.modules.ContextModule
 import com.ikurek.drugsafe.di.modules.SharedPreferencesModule
+import com.ikurek.drugsafe.drugdetails.DrugDetailsPresenter
 import com.ikurek.drugsafe.loginactivity.LoginPresenter
 import com.ikurek.drugsafe.mainactivity.MainPresenter
 import com.ikurek.drugsafe.mydrugs.MyDrugsPresenter
@@ -18,4 +19,5 @@ interface PresenterComponent {
     fun inject(mainPresenter: MainPresenter)
     fun inject(myDrugsPresenter: MyDrugsPresenter)
     fun inject(searchDrugsPresenter: SearchDrugsPresenter)
+    fun inject(drugDetailsPresenter: DrugDetailsPresenter)
 }

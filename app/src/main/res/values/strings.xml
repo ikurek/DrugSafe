@@ -7,6 +7,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="my_drugs">My Drugs</string>
     <string name="search_drugs">Search drugs</string>
+    <string name="drug_details">Drug details</string>
     <string name="dialog_exit_title">Close DrugSafe</string>
     <string name="dialog_exit_body">Are You sure You want to quit?</string>
     <string name="title_activity_login">Sign in</string>
@@ -16,6 +17,7 @@
     <!-- Fragment tags -->
     <string name="fragment_tag_mydrugs" translatable="false">MyDrugsFragment</string>
     <string name="fragment_tag_searchdrugs" translatable="false">SearchDrugsFragment</string>
+    <string name="fragment_tag_drugdetails" translatable="false">DrugDetailsFragment</string>
 
     <!-- SharedPreferences Keys -->
     <string name="sp_key_auth_token" translatable="false">auth_token</string>
@@ -48,4 +50,7 @@
     <string name="error_internal_server_error">An internal server error has occurred. Please try again.</string>
     <string name="error_drug_query_too_short">Please enter at least 3 characters</string>
     <string name="error_no_drugs_found">No drugs found</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

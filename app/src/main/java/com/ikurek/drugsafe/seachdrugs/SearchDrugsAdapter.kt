@@ -1,6 +1,5 @@
 package com.ikurek.drugsafe.seachdrugs
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,8 +8,7 @@ import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.databinding.RowDrugBinding
 import com.ikurek.drugsafe.model.DrugModel
 
-class SearchDrugsAdapter(var drugs: List<DrugModel>) : RecyclerView.Adapter<SearchDrugsAdapter.ViewHolder>(),
-    SearchDrugsItemClickListener {
+class SearchDrugsAdapter(var drugs: List<DrugModel>, val onElementClicked: (DrugModel) -> Unit) : RecyclerView.Adapter<SearchDrugsAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: RowDrugBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -24,16 +22,13 @@ class SearchDrugsAdapter(var drugs: List<DrugModel>) : RecyclerView.Adapter<Sear
 
     override fun getItemCount(): Int = drugs.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(drugs[position])
-
-    override fun onItemClicked(drug: DrugModel) {
-        Log.d("Clicked", "Drug ${drug.name}")
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(drugs[position], onElementClicked)
 
     class ViewHolder(var drugLayoutBinding: RowDrugBinding) : RecyclerView.ViewHolder(drugLayoutBinding.root) {
-        fun bind(drug: DrugModel) {
+        fun bind(drug: DrugModel, onElementClicked: (DrugModel) -> Unit) {
             drugLayoutBinding.drug = drug
             drugLayoutBinding.executePendingBindings()
+            drugLayoutBinding.root.setOnClickListener { onElementClicked(drug) }
 
         }
     }

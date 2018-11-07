@@ -7,9 +7,6 @@
         <variable
                 name="drug"
                 type="com.ikurek.drugsafe.model.DrugModel"/>
-        <variable
-                name="itemClickListener"
-                type="com.ikurek.drugsafe.seachdrugs.SearchDrugsItemClickListener"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

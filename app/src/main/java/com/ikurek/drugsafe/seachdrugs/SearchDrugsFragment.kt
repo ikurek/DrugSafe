@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
+import com.ikurek.drugsafe.drugdetails.DrugDetailsFragment
+import com.ikurek.drugsafe.mainactivity.MainActivity
+import com.ikurek.drugsafe.model.DrugModel
 import com.ikurek.drugsafe.utlis.Validators
 import kotlinx.android.synthetic.main.fragment_search_drugs.*
 import javax.inject.Inject
@@ -76,7 +79,10 @@ class SearchDrugsFragment : Fragment(), SearchDrugsContract.View {
         textview_background.visibility = View.VISIBLE
     }
 
-    override fun setItems(items: List<String>) {
+
+    override fun startDetailsFragment(drugModel: DrugModel) {
+        val parentActivity = this.activity as MainActivity
+        parentActivity.changeFragment(DrugDetailsFragment.instantiateWithDrugModel(drugModel), getString(R.string.fragment_tag_drugdetails), true)
     }
 
     override fun getWindowToken(): IBinder {

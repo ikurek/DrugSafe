@@ -69,7 +69,7 @@ class SearchDrugsPresenter : SearchDrugsContract.Presenter {
                         val drugs =
                             response.body()!!.sortedWith(compareBy(DrugModel::name, DrugModel::ammountOfSubstance))
                         view?.hideProgressIndicator()
-                        view?.updateRecyclerView(SearchDrugsAdapter(drugs))
+                        view?.updateRecyclerView(SearchDrugsAdapter(drugs) { itemClicked(it) })
                     }
                     404 -> {
                         view?.hideProgressIndicator()
@@ -83,11 +83,9 @@ class SearchDrugsPresenter : SearchDrugsContract.Presenter {
         })
     }
 
-    override fun onItemsLoaded() {
 
-    }
-
-    override fun onItemClicked() {
+    private fun itemClicked(drugModel: DrugModel) {
+        view?.startDetailsFragment(drugModel)
     }
 
 }

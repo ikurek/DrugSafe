@@ -1,5 +1,7 @@
 package com.ikurek.drugsafe.di.modules
 
+import com.ikurek.drugsafe.drugdetails.DrugDetailsContract
+import com.ikurek.drugsafe.drugdetails.DrugDetailsPresenter
 import com.ikurek.drugsafe.loginactivity.LoginContract
 import com.ikurek.drugsafe.loginactivity.LoginPresenter
 import com.ikurek.drugsafe.mainactivity.MainContract
@@ -37,8 +39,13 @@ class PresenterModule {
     }
 
     @Provides
-    fun provideSearchDrugsFragment(): SearchDrugsContract.Presenter {
+    fun provideSearchDrugsPresenter(): SearchDrugsContract.Presenter {
         return SearchDrugsPresenter()
+    }
+
+    @Provides
+    fun provideDrugDetailsPresenter(): DrugDetailsContract.Presenter {
+        return DrugDetailsPresenter()
     }
 
 }

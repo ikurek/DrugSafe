@@ -142,6 +142,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 toolbar.title = getString(R.string.search_drugs)
                 fab.hide()
             }
+            getString(R.string.fragment_tag_drugdetails) -> {
+                toolbar.title = getString(R.string.drug_details)
+                fab.hide()
+            }
         }
     }
 }
