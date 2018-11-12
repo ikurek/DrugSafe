@@ -6,9 +6,8 @@ import com.ikurek.drugsafe.base.BaseContract
 
 interface MainContract {
 
-    interface Presenter : BaseContract.Presenter<MainContract.View>, NavigationView.OnNavigationItemSelectedListener {
-        fun handleFloatingActionButton()
-    }
+    interface Presenter : BaseContract.Presenter<MainContract.View>,
+        NavigationView.OnNavigationItemSelectedListener
 
     interface View : BaseContract.View {
         fun openDrawer()
@@ -16,7 +15,6 @@ interface MainContract {
         fun drawerIsOpen(): Boolean
         fun changeFragment(fragment: Fragment, tag: String, addToBackstack: Boolean)
         fun setupNavigationDrawer()
-        fun setupFloatingActionButton()
         fun showExitDialog()
         fun updateMainActivityUIByCurrentFragmentTag()
     }

@@ -17,8 +17,7 @@ class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSel
     @Inject
     lateinit var context: Context
 
-    private var myDrugsFragment = MyDrugsFragment()
-    private var searchDrugsFragment = SearchDrugsFragment()
+    var myDrugsFragment = MyDrugsFragment()
 
     override fun attach(view: MainContract.View) {
         Log.d("MainPresenter", "Attached")
@@ -39,7 +38,11 @@ class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSel
                 view?.changeFragment(myDrugsFragment, context.getString(R.string.fragment_tag_mydrugs), true)
             }
             R.id.nav_search_drugs -> {
-                view?.changeFragment(searchDrugsFragment, context.getString(R.string.fragment_tag_searchdrugs), true)
+                view?.changeFragment(
+                    SearchDrugsFragment(),
+                    context.getString(R.string.fragment_tag_searchdrugs),
+                    true
+                )
             }
             R.id.nav_settings -> {
 
@@ -49,10 +52,4 @@ class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSel
         view?.closeDrawer()
         return true
     }
-
-    override fun handleFloatingActionButton() {
-        view?.changeFragment(searchDrugsFragment, context.getString(R.string.fragment_tag_searchdrugs), true)
-    }
-
-
 }

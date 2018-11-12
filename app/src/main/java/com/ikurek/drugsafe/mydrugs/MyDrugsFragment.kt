@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
+import com.ikurek.drugsafe.mainactivity.MainActivity
+import com.ikurek.drugsafe.seachdrugs.SearchDrugsFragment
+import kotlinx.android.synthetic.main.fragment_my_drugs.*
 import javax.inject.Inject
 
 /**
@@ -28,6 +31,7 @@ class MyDrugsFragment : Fragment(), MyDrugsContract.View {
         super.onViewCreated(view, savedInstanceState)
         BaseApp.fragmentComponent.inject(this)
         presenter.attach(this)
+        bindFAB()
     }
 
     override fun onDestroyView() {
@@ -47,6 +51,19 @@ class MyDrugsFragment : Fragment(), MyDrugsContract.View {
     }
 
     override fun setItems(items: List<String>) {
+    }
+
+    override fun startSearchDrugFragment() {
+        val parentActivity = this.activity as MainActivity
+        parentActivity.changeFragment(
+            SearchDrugsFragment(),
+            getString(R.string.fragment_tag_searchdrugs),
+            true
+        )
+    }
+
+    private fun bindFAB() {
+        fab.setOnClickListener { presenter.handleFloatingActionButton() }
     }
 
 

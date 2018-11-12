@@ -10,6 +10,8 @@ import com.ikurek.drugsafe.mydrugs.MyDrugsContract
 import com.ikurek.drugsafe.mydrugs.MyDrugsPresenter
 import com.ikurek.drugsafe.registeractivity.RegisterContract
 import com.ikurek.drugsafe.registeractivity.RegisterPresenter
+import com.ikurek.drugsafe.replacementslist.ReplacementListContract
+import com.ikurek.drugsafe.replacementslist.ReplacementListPresenter
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsContract
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsPresenter
 import dagger.Module
@@ -46,6 +48,11 @@ class PresenterModule {
     @Provides
     fun provideDrugDetailsPresenter(): DrugDetailsContract.Presenter {
         return DrugDetailsPresenter()
+    }
+
+    @Provides
+    fun provideReplacementListPresenter(): ReplacementListContract.Presenter {
+        return ReplacementListPresenter()
     }
 
 }

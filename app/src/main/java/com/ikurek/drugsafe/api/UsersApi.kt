@@ -8,11 +8,11 @@ import retrofit2.http.POST
 
 interface UsersApi {
 
-    @POST("/api/v1/login")
+    @POST("/api/login")
     @Headers("Content-Type: application/json", "Accept: application/json ")
     fun login(@Body loginModel: LoginModel): Call<Void>
 
-    @POST("/api/v1/register")
+    @POST("/api/register")
     @Headers("Content-Type: application/json", "Accept: application/json")
     fun register(@Body loginModel: LoginModel): Call<Void>
 }

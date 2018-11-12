@@ -13,11 +13,14 @@
     <string name="title_activity_login">Sign in</string>
     <string name="search_drug_or_substance">Search for drug or substance</string>
     <string name="type_drug_or_substance_first">Type a name or substance to search drugs database</string>
+    <string name="find_replacement_drugs">Find replacement drugs</string>
+    <string name="save_drug">Save drug</string>
 
     <!-- Fragment tags -->
     <string name="fragment_tag_mydrugs" translatable="false">MyDrugsFragment</string>
     <string name="fragment_tag_searchdrugs" translatable="false">SearchDrugsFragment</string>
     <string name="fragment_tag_drugdetails" translatable="false">DrugDetailsFragment</string>
+    <string name="fragment_tag_replacementslist" translatable="false">ReplacementListFragment</string>
 
     <!-- SharedPreferences Keys -->
     <string name="sp_key_auth_token" translatable="false">auth_token</string>
@@ -30,6 +33,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="repeat_password">Repeat password</string>
+    <string name="replacements">Replacements</string>
 
     <!-- Success strings -->
     <string name="success_registration">You have registered successfully. You can now log in.</string>

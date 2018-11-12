@@ -4,6 +4,7 @@ import com.ikurek.drugsafe.di.modules.ContextModule
 import com.ikurek.drugsafe.di.modules.PresenterModule
 import com.ikurek.drugsafe.drugdetails.DrugDetailsFragment
 import com.ikurek.drugsafe.mydrugs.MyDrugsFragment
+import com.ikurek.drugsafe.replacementslist.ReplacementListFragment
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsFragment
 import dagger.Component
 
@@ -13,5 +14,6 @@ interface FragmentComponent {
     fun inject(myDrugsFragment: MyDrugsFragment)
     fun inject(searchDrugsFragment: SearchDrugsFragment)
     fun inject(drugDetailsFragment: DrugDetailsFragment)
+    fun inject(replacementListFragment: ReplacementListFragment)
 
 }

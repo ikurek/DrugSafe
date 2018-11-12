@@ -1,9 +1,8 @@
-package com.ikurek.drugsafe.seachdrugs
+package com.ikurek.drugsafe.replacementslist
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import android.view.inputmethod.InputMethodManager
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.api.DrugsApi
 import com.ikurek.drugsafe.base.BaseApp
@@ -13,7 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class SearchDrugsPresenter : SearchDrugsContract.Presenter {
+class ReplacementListPresenter : ReplacementListContract.Presenter {
 
     @Inject
     lateinit var drugsApi: DrugsApi
@@ -24,11 +23,11 @@ class SearchDrugsPresenter : SearchDrugsContract.Presenter {
     @Inject
     lateinit var context: Context
 
-    var view: SearchDrugsContract.View? = null
+    var view: ReplacementListContract.View? = null
 
-    var drugs: List<DrugModel> = listOf()
+    var replacements: List<DrugModel> = listOf()
 
-    override fun attach(view: SearchDrugsContract.View) {
+    override fun attach(view: ReplacementListContract.View) {
         this.view = view
         BaseApp.presenterComponent.inject(this)
     }
@@ -37,20 +36,18 @@ class SearchDrugsPresenter : SearchDrugsContract.Presenter {
         this.view = null
     }
 
-    override fun loadLastSearchedDrugs() {
-        if (drugs.isNotEmpty()) {
-            view?.updateRecyclerView(SearchDrugsAdapter(drugs) { itemClicked(it) })
+    override fun loadReplacementsForId(id: Long) {
+
+        if (replacements.isEmpty()) {
+            getReplacements(id)
         } else {
-            view?.showBackgroundText()
+            view?.updateRecyclerView(ReplacementListAdapter(replacements) { itemClicked(it) })
         }
+
     }
 
-    override fun handleSearchClick(query: String) {
-        // Hide keyboard
-        val inputMethodManager: InputMethodManager =
-            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.getWindowToken(), 0)
 
+    private fun getReplacements(id: Long) {
         // Read token
         val token = sharedPreferences.getString(context.getString(R.string.sp_key_auth_token), "")
 
@@ -58,32 +55,38 @@ class SearchDrugsPresenter : SearchDrugsContract.Presenter {
         // TODO: Deauth here
 
         // Show progress
-        view?.clearRecyclerView()
-        view?.hideBackgroundText()
         view?.showProgressIndicator()
-        drugsApi.getDrug(token!!, query).enqueue(object : Callback<List<DrugModel>> {
+        drugsApi.getDrugReplacementsById(token!!, id).enqueue(object : Callback<List<DrugModel>> {
             override fun onFailure(call: Call<List<DrugModel>>, t: Throwable) {
-                Log.e("SearchDrugs", "Failed. Reason: $t")
-                Log.e("SearchDrugs", "Sent ${call.request()}")
+                Log.e("SearchReplacements", "Failed. Reason: $t")
+                Log.e("SearchReplacements", "Sent ${call.request()}")
 
 
                 view?.hideProgressIndicator()
-                view?.hideBackgroundText()
+                view?.showNoDrugsFoundText()
             }
 
-            override fun onResponse(call: Call<List<DrugModel>>, response: Response<List<DrugModel>>) {
+            override fun onResponse(
+                call: Call<List<DrugModel>>,
+                response: Response<List<DrugModel>>
+            ) {
                 Log.d("SearchDrugs", "Success. Response: $response ")
 
                 when (response.code()) {
                     200 -> {
-                        drugs = response.body()!!.sortedWith(
-                            compareBy(
-                                DrugModel::name,
-                                DrugModel::ammountOfSubstance
-                            )
-                        )
+                        replacements =
+                                response.body()!!.sortedWith(
+                                    compareBy(
+                                        DrugModel::name,
+                                        DrugModel::ammountOfSubstance
+                                    )
+                                )
                         view?.hideProgressIndicator()
-                        view?.updateRecyclerView(SearchDrugsAdapter(drugs) { itemClicked(it) })
+                        view?.updateRecyclerView(ReplacementListAdapter(replacements) {
+                            itemClicked(
+                                it
+                            )
+                        })
                     }
                     404 -> {
                         view?.hideProgressIndicator()
@@ -96,7 +99,6 @@ class SearchDrugsPresenter : SearchDrugsContract.Presenter {
 
         })
     }
-
 
     private fun itemClicked(drugModel: DrugModel) {
         view?.startDetailsFragment(drugModel)

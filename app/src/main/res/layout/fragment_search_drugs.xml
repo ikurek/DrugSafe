@@ -49,20 +49,21 @@
             app:layout_constraintTop_toBottomOf="@+id/search_drugs_text"/>
 
     <TextView
-            android:id="@+id/textview_background"
-            style="@style/Base.Theme.MaterialComponents.BackgroundText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/type_drug_or_substance_first"
-            android:typeface="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_drugs_text"/>
+        android:id="@+id/textview_background"
+        style="@style/Base.Theme.MaterialComponents.BackgroundText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/type_drug_or_substance_first"
+        android:typeface="normal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_drugs_text" />
 
     <com.iitr.kaishu.nsidedprogressbar.NSidedProgressBar
             android:id="@+id/progress_indicator"

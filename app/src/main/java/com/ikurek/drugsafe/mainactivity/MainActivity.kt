@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         setTitle(R.string.my_drugs)
         BaseApp.activityComponent.inject(this)
         setupNavigationDrawer()
-        setupFloatingActionButton()
         presenter.attach(this)
     }
 
@@ -114,10 +113,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         nav_view.getHeaderView(0).nav_header_email.text = email
     }
 
-    override fun setupFloatingActionButton() {
-        fab.setOnClickListener { presenter.handleFloatingActionButton() }
-    }
-
     override fun showExitDialog() {
         MaterialDialog(this)
             .title(R.string.dialog_exit_title)
@@ -135,16 +130,16 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             getString(R.string.fragment_tag_mydrugs) -> {
                 toolbar.title = getString(R.string.my_drugs)
                 nav_view.setCheckedItem(R.id.nav_my_drugs)
-                fab.show()
             }
             getString(R.string.fragment_tag_searchdrugs) -> {
                 nav_view.setCheckedItem(R.id.nav_search_drugs)
                 toolbar.title = getString(R.string.search_drugs)
-                fab.hide()
             }
             getString(R.string.fragment_tag_drugdetails) -> {
                 toolbar.title = getString(R.string.drug_details)
-                fab.hide()
+            }
+            getString(R.string.fragment_tag_replacementslist) -> {
+                toolbar.title = getString(R.string.replacements)
             }
         }
     }

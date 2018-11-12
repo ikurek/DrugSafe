@@ -8,6 +8,7 @@ interface SearchDrugsContract {
 
     interface Presenter : BaseContract.Presenter<SearchDrugsContract.View> {
         fun handleSearchClick(query: String)
+        fun loadLastSearchedDrugs()
     }
 
     interface View : BaseContract.View {

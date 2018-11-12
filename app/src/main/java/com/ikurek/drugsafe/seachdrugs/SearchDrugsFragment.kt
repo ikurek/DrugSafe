@@ -23,15 +23,20 @@ class SearchDrugsFragment : Fragment(), SearchDrugsContract.View {
     @Inject
     lateinit var presenter: SearchDrugsContract.Presenter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        BaseApp.fragmentComponent.inject(this)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_search_drugs, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        BaseApp.fragmentComponent.inject(this)
         presenter.attach(this)
         bindHandlers()
+        presenter.loadLastSearchedDrugs()
     }
 
     override fun onDestroyView() {
@@ -82,7 +87,11 @@ class SearchDrugsFragment : Fragment(), SearchDrugsContract.View {
 
     override fun startDetailsFragment(drugModel: DrugModel) {
         val parentActivity = this.activity as MainActivity
-        parentActivity.changeFragment(DrugDetailsFragment.instantiateWithDrugModel(drugModel), getString(R.string.fragment_tag_drugdetails), true)
+        parentActivity.changeFragment(
+            DrugDetailsFragment.instantiateWithDrugModel(drugModel, true),
+            getString(R.string.fragment_tag_drugdetails),
+            true
+        )
     }
 
     override fun getWindowToken(): IBinder {

@@ -8,7 +8,8 @@ import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.model.DrugModel
 import kotlinx.android.synthetic.main.row_drug_details.view.*
 
-class DrugDetailsAdapter(val drug: DrugModel) : RecyclerView.Adapter<DrugDetailsAdapter.ViewHolder>() {
+class DrugDetailsAdapter(val drug: DrugModel, val drugModelFieldMap: Map<String, String>) :
+    RecyclerView.Adapter<DrugDetailsAdapter.ViewHolder>() {
 
     val map = drug.toIndexedStringMap()
 
@@ -26,7 +27,7 @@ class DrugDetailsAdapter(val drug: DrugModel) : RecyclerView.Adapter<DrugDetails
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(keyToValuePair: Pair<String, String>) {
 
-            view.title.text = keyToValuePair.first
+            view.title.text = drugModelFieldMap[keyToValuePair.first]
             view.content.text = keyToValuePair.second
         }
     }

@@ -17,11 +17,8 @@ class MyDrugsPresenter : MyDrugsContract.Presenter {
         this.view = null
     }
 
-    override fun onItemsLoaded() {
-
-    }
-
-    override fun onItemClicked() {
+    override fun handleFloatingActionButton() {
+        view?.startSearchDrugFragment()
     }
 
 }

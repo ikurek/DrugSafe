@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
+import com.ikurek.drugsafe.mainactivity.MainActivity
 import com.ikurek.drugsafe.model.DrugModel
+import com.ikurek.drugsafe.replacementslist.ReplacementListFragment
 import kotlinx.android.synthetic.main.fragment_drug_details.*
 import javax.inject.Inject
 
@@ -19,6 +21,7 @@ class DrugDetailsFragment : Fragment(), DrugDetailsContract.View {
     lateinit var presenter: DrugDetailsContract.Presenter
 
     lateinit var drugModel: DrugModel
+    var shouldShowFAB: Boolean = true
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -30,7 +33,7 @@ class DrugDetailsFragment : Fragment(), DrugDetailsContract.View {
         BaseApp.fragmentComponent.inject(this)
         presenter.attach(this)
         bindRecyclerView()
-        bindHandlers()
+        bindFAB()
     }
 
     override fun onDestroyView() {
@@ -43,17 +46,38 @@ class DrugDetailsFragment : Fragment(), DrugDetailsContract.View {
         BaseApp.currentlyVisibleFragmentTag = getString(R.string.fragment_tag_searchdrugs)
     }
 
-    private fun bindRecyclerView() {
-        recyclerview.layoutManager = LinearLayoutManager(this.context)
-        recyclerview.adapter = DrugDetailsAdapter(drugModel)
+    override fun startSearchReplacementsFragment() {
+        val parentActivity = this.activity as MainActivity
+        parentActivity.changeFragment(
+            ReplacementListFragment.instantiateWithDrugId(drugModel.id),
+            getString(R.string.fragment_tag_replacementslist),
+            true
+        )
     }
 
-    private fun bindHandlers() {
+    private fun bindRecyclerView() {
+        recyclerview.layoutManager = LinearLayoutManager(this.context)
+        recyclerview.adapter = DrugDetailsAdapter(drugModel, presenter.getDrugModelFieldMap())
+    }
 
+    private fun bindFAB() {
+        if (shouldShowFAB) {
+            fab_menu.visibility = View.VISIBLE
+            fab_menu.inflate(R.menu.drug_details_fab)
+            fab_menu.setOnActionSelectedListener(this.presenter)
+        } else {
+            fab_menu.visibility = View.GONE
+        }
     }
 
     companion object {
-        fun instantiateWithDrugModel(drugModel: DrugModel): DrugDetailsFragment = DrugDetailsFragment().apply { this.drugModel = drugModel }
+        fun instantiateWithDrugModel(
+            drugModel: DrugModel,
+            shouldShowFAB: Boolean
+        ): DrugDetailsFragment = DrugDetailsFragment().apply {
+            this.drugModel = drugModel
+            this.shouldShowFAB = shouldShowFAB
+        }
     }
 
 

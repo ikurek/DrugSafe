@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_save_drug"
+        android:icon="@drawable/ic_add"
+        android:title="@string/save_drug" />
+
+    <item
+        android:id="@+id/menu_find_replacements"
+        android:icon="@drawable/ic_add"
+        android:title="@string/find_replacement_drugs" />
+</menu>
