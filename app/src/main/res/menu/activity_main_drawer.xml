@@ -7,19 +7,28 @@
         <item
                 android:id="@+id/nav_my_drugs"
                 android:icon="@drawable/ic_local_pharmacy"
-                android:title="My Drugs"/>
+            android:title="@string/my_drugs" />
         <item
                 android:id="@+id/nav_search_drugs"
-                android:icon="@drawable/ic_search"
-                android:title="Search"/>
+            android:icon="@drawable/ic_action_search"
+            android:title="@string/search_drugs" />
+        <item
+            android:id="@+id/nav_scan"
+            android:icon="@drawable/ic_action_barcode"
+            android:title="@string/scan_barcode" />
     </group>
 
-    <item android:title="Other">
+    <item android:title="@string/other">
         <menu>
             <item
                     android:id="@+id/nav_settings"
-                    android:icon="@drawable/ic_settings_applications"
-                    android:title="Settings"/>
+                android:icon="@drawable/ic_action_settings"
+                android:title="@string/settings" />
+
+            <item
+                android:id="@+id/nav_signout"
+                android:icon="@drawable/ic_action_exit"
+                android:title="@string/signout" />
         </menu>
     </item>
 

@@ -45,15 +45,13 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     }
 
-
-
     override fun startRegisterActivity() {
         startActivity(Intent(this, RegisterActivity::class.java))
     }
 
     override fun startMainActivity() {
+        this.finish()
         startActivity(Intent(this, MainActivity::class.java))
-        this.finishAffinity()
     }
 
     override fun showServerOfflineDialog() {

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.MaterialDialog
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
+import com.ikurek.drugsafe.utlis.Session
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
@@ -142,5 +143,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 toolbar.title = getString(R.string.replacements)
             }
         }
+    }
+
+    override fun signOut() {
+        this.finish()
+        Session.signOut(this)
     }
 }

@@ -24,8 +24,8 @@ data class DrugModel(
 
         if (!name.isNullOrBlank() && name != "null") map.add(Pair("name", name!!))
         if (!commonName.isNullOrBlank() && commonName != "null") map.add(Pair("commonName", commonName!!))
-        if (!drugType.isNullOrBlank() && drugType != "null") map.add(Pair("drugType", drugType!!))
         if (!ammountOfSubstance.isNullOrBlank() && ammountOfSubstance != "null") map.add(Pair("ammountOfSubstance", ammountOfSubstance!!))
+        if (!drugType.isNullOrBlank() && drugType != "null") map.add(Pair("drugType", drugType!!))
         if (!type.isNullOrBlank() && type != "null") map.add(Pair("type", type!!))
         if (!owner.isNullOrBlank() && owner != "null") map.add(Pair("owner", owner!!))
         if (!procedureType.isNullOrBlank() && procedureType != "null") map.add(Pair("procedureType", procedureType!!))

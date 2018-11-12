@@ -47,6 +47,10 @@ class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSel
             R.id.nav_settings -> {
 
             }
+
+            R.id.nav_signout -> {
+                view?.signOut()
+            }
         }
 
         view?.closeDrawer()

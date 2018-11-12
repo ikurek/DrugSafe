@@ -17,5 +17,6 @@ interface MainContract {
         fun setupNavigationDrawer()
         fun showExitDialog()
         fun updateMainActivityUIByCurrentFragmentTag()
+        fun signOut()
     }
 }
