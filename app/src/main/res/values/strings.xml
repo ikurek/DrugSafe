@@ -19,6 +19,7 @@
     <string name="fragment_tag_searchdrugs" translatable="false">SearchDrugsFragment</string>
     <string name="fragment_tag_drugdetails" translatable="false">DrugDetailsFragment</string>
     <string name="fragment_tag_replacementslist" translatable="false">ReplacementListFragment</string>
+    <string name="fragment_tag_scanbarcode" translatable="false">BarcodeScannerFragment</string>
 
     <!-- SharedPreferences Keys -->
     <string name="sp_key_auth_token" translatable="false">auth_token</string>

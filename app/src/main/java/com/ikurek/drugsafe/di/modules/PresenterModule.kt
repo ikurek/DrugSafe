@@ -1,5 +1,7 @@
 package com.ikurek.drugsafe.di.modules
 
+import com.ikurek.drugsafe.barcodescanner.BarcodeScannerContract
+import com.ikurek.drugsafe.barcodescanner.BarcodeScannerPresenter
 import com.ikurek.drugsafe.drugdetails.DrugDetailsContract
 import com.ikurek.drugsafe.drugdetails.DrugDetailsPresenter
 import com.ikurek.drugsafe.loginactivity.LoginContract
@@ -53,6 +55,11 @@ class PresenterModule {
     @Provides
     fun provideReplacementListPresenter(): ReplacementListContract.Presenter {
         return ReplacementListPresenter()
+    }
+
+    @Provides
+    fun provideBarcodeScannerPresenter(): BarcodeScannerContract.Presenter {
+        return BarcodeScannerPresenter()
     }
 
 }

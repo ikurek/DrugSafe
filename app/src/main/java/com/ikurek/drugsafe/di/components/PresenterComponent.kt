@@ -1,5 +1,6 @@
 package com.ikurek.drugsafe.di.components
 
+import com.ikurek.drugsafe.barcodescanner.BarcodeScannerPresenter
 import com.ikurek.drugsafe.di.modules.ApiModule
 import com.ikurek.drugsafe.di.modules.ContextModule
 import com.ikurek.drugsafe.di.modules.SharedPreferencesModule
@@ -22,4 +23,5 @@ interface PresenterComponent {
     fun inject(searchDrugsPresenter: SearchDrugsPresenter)
     fun inject(drugDetailsPresenter: DrugDetailsPresenter)
     fun inject(replacementListPresenter: ReplacementListPresenter)
+    fun inject(barcodeScannerPresenter: BarcodeScannerPresenter)
 }

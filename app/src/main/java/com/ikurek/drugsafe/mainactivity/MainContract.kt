@@ -3,6 +3,7 @@ package com.ikurek.drugsafe.mainactivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.ikurek.drugsafe.base.BaseContract
+import com.karumi.dexter.listener.single.PermissionListener
 
 interface MainContract {
 
@@ -18,5 +19,6 @@ interface MainContract {
         fun showExitDialog()
         fun updateMainActivityUIByCurrentFragmentTag()
         fun signOut()
+        fun requestCameraPermission(cameraPermissionListener: PermissionListener)
     }
 }

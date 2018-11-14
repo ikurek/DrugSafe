@@ -50,6 +50,12 @@ dependencies {
     // Data Binding
     kapt "com.android.databinding:compiler:$gradle_version"
 
+    // Permissions
+    implementation 'com.karumi:dexter:5.0.0'
+
+    // Barcodes
+    implementation 'com.github.Tetr4:ZXingView:-SNAPSHOT'
+
     // Tests
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'

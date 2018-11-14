@@ -1,5 +1,6 @@
 package com.ikurek.drugsafe.mainactivity
 
+import android.Manifest
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,8 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.utlis.Session
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.nav_header_main.view.*
@@ -142,7 +145,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             getString(R.string.fragment_tag_replacementslist) -> {
                 toolbar.title = getString(R.string.replacements)
             }
+            getString(R.string.fragment_tag_scanbarcode) -> {
+                nav_view.setCheckedItem(R.id.nav_scan)
+                toolbar.title = getString(R.string.scan_barcode)
+            }
         }
+    }
+
+    override fun requestCameraPermission(cameraPermissionListener: PermissionListener) {
+        Dexter.withActivity(this)
+            .withPermission(Manifest.permission.CAMERA)
+            .withListener(cameraPermissionListener)
+            .check()
     }
 
     override fun signOut() {

@@ -5,10 +5,17 @@ import android.util.Log
 import android.view.MenuItem
 import com.google.android.material.navigation.NavigationView
 import com.ikurek.drugsafe.R
+import com.ikurek.drugsafe.barcodescanner.BarcodeScannerFragment
 import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.mydrugs.MyDrugsFragment
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsFragment
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import javax.inject.Inject
+
 
 class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSelectedListener {
 
@@ -44,6 +51,11 @@ class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSel
                     true
                 )
             }
+
+            R.id.nav_scan -> {
+                view?.requestCameraPermission(cameraPermissionListener)
+            }
+
             R.id.nav_settings -> {
 
             }
@@ -55,5 +67,27 @@ class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSel
 
         view?.closeDrawer()
         return true
+    }
+
+    private val cameraPermissionListener: PermissionListener = object : PermissionListener {
+        override fun onPermissionGranted(response: PermissionGrantedResponse) {
+            view?.changeFragment(
+                BarcodeScannerFragment(),
+                context.getString(R.string.fragment_tag_scanbarcode),
+                true
+            )
+        }
+
+        override fun onPermissionDenied(response: PermissionDeniedResponse) {
+            //TODO: Handle
+        }
+
+        override fun onPermissionRationaleShouldBeShown(
+            permission: PermissionRequest,
+            token: PermissionToken
+        ) {
+            //TODO: Handle
+        }
+
     }
 }
