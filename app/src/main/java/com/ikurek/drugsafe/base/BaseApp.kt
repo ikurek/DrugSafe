@@ -3,14 +3,12 @@ package com.ikurek.drugsafe.base
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
+import androidx.room.Room
 import com.ikurek.drugsafe.api.DrugsApi
 import com.ikurek.drugsafe.api.UsersApi
+import com.ikurek.drugsafe.database.AppDatabase
 import com.ikurek.drugsafe.di.components.*
-import com.ikurek.drugsafe.di.modules.ApiModule
-import com.ikurek.drugsafe.di.modules.ContextModule
-import com.ikurek.drugsafe.di.modules.PresenterModule
-import com.ikurek.drugsafe.di.modules.SharedPreferencesModule
+import com.ikurek.drugsafe.di.modules.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -28,13 +26,14 @@ class BaseApp : Application() {
     lateinit var usersApi: UsersApi
     lateinit var drugsApi: DrugsApi
     lateinit var sharedPreferences: SharedPreferences
+    lateinit var database: AppDatabase
 
 
     override fun onCreate() {
         super.onCreate()
-        Log.e("BaseApp", "Running")
         buildRetrofit()
         buildSharedPreferences()
+        buildDatabase()
         buildDagger()
     }
 
@@ -43,6 +42,7 @@ class BaseApp : Application() {
                 .contextModule(ContextModule(applicationContext))
             .apiModule(ApiModule(usersApi, drugsApi))
             .sharedPreferencesModule(SharedPreferencesModule(sharedPreferences))
+            .databaseModule(DatabaseModule(database))
                 .build()
         activityComponent = DaggerActivityComponent.builder()
             .contextModule(ContextModule(applicationContext))
@@ -70,6 +70,14 @@ class BaseApp : Application() {
         sharedPreferences = applicationContext.getSharedPreferences("drugsafesp", Context.MODE_PRIVATE)
     }
 
+    private fun buildDatabase() {
+        database = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "drugsafedb"
+        )
+            .build()
+    }
 
 
 }

@@ -1,18 +1,24 @@
 package com.ikurek.drugsafe.model
 
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.ikurek.drugsafe.database.DataTypeConverter
+
 data class DrugModel(
-        var id: Long,
-        var name: String?,
-        var commonName: String?,
-        var drugType: String?,
-        var ammountOfSubstance: String?,
-        var type: String?,
-        var owner: String?,
-        var procedureType: String?,
-        var permissionNumber: Long?,
-        var permissionExpiry: String?,
-        var atc: String?,
-        var substances: List<String>?
+    @PrimaryKey
+    var id: Long,
+    var name: String?,
+    var commonName: String?,
+    var drugType: String?,
+    var ammountOfSubstance: String?,
+    var type: String?,
+    var owner: String?,
+    var procedureType: String?,
+    var permissionNumber: Long?,
+    var permissionExpiry: String?,
+    var atc: String?,
+    @TypeConverters(DataTypeConverter::class)
+    var substances: List<String>?
 ) {
 
     inline fun toIndexedStringMap(): List<Pair<String, String>> {

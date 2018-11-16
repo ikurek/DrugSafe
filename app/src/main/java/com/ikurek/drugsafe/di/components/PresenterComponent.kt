@@ -3,6 +3,7 @@ package com.ikurek.drugsafe.di.components
 import com.ikurek.drugsafe.barcodescanner.BarcodeScannerPresenter
 import com.ikurek.drugsafe.di.modules.ApiModule
 import com.ikurek.drugsafe.di.modules.ContextModule
+import com.ikurek.drugsafe.di.modules.DatabaseModule
 import com.ikurek.drugsafe.di.modules.SharedPreferencesModule
 import com.ikurek.drugsafe.drugdetails.DrugDetailsPresenter
 import com.ikurek.drugsafe.loginactivity.LoginPresenter
@@ -13,7 +14,14 @@ import com.ikurek.drugsafe.replacementslist.ReplacementListPresenter
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsPresenter
 import dagger.Component
 
-@Component(modules = [ContextModule::class, ApiModule::class, SharedPreferencesModule::class])
+@Component(
+    modules = [
+        ContextModule::class,
+        ApiModule::class,
+        SharedPreferencesModule::class,
+        DatabaseModule::class
+    ]
+)
 interface PresenterComponent {
 
     fun inject(loginPresenter: LoginPresenter)
