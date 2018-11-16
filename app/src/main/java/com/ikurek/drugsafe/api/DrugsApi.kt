@@ -10,11 +10,29 @@ import retrofit2.http.Query
 interface DrugsApi {
 
     @GET("/api/drugs")
-    fun getDrug(@Header("Authorization") token: String, @Query("name") name: String): Call<List<DrugModel>>
+    fun getDrug(
+        @Header("Authorization") token: String,
+        @Query("name") name: String
+    )
+            : Call<List<DrugModel>>
 
     @GET("/api/drugs/{id}")
-    fun getDrugById(@Path("id") id: Long): Call<DrugModel>
+    fun getDrugById(
+        @Path("id") id: Long
+    )
+            : Call<DrugModel>
 
     @GET("/api/replacements/{id}")
-    fun getDrugReplacementsById(@Header("Authorization") token: String, @Path("id") id: Long): Call<List<DrugModel>>
+    fun getDrugReplacementsById(
+        @Header("Authorization") token: String,
+        @Path("id") id: Long
+    )
+            : Call<List<DrugModel>>
+
+    @GET("/api/packagings")
+    fun getDrugByPackageEan(
+        @Header("Authorization") token: String,
+        @Query("ean") ean: Long
+    )
+            : Call<DrugModel>
 }

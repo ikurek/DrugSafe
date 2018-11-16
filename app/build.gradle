@@ -33,7 +33,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
 
     // UI
-    implementation 'com.afollestad.material-dialogs:core:2.0.0-beta4'
+    implementation 'com.afollestad.material-dialogs:core:2.0.0-beta5'
     implementation 'com.kaishu.nspb:nsidedprogressbar:1.0.0'
     implementation "com.leinardi.android:speed-dial:2.0.0"
 

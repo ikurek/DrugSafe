@@ -20,4 +20,10 @@ object Validators {
         return query.trim().length >= 3
     }
 
+    fun isEanValid(ean: String): Boolean {
+        val eanAsLong: Long? = ean.toLongOrNull()
+
+        return eanAsLong != null
+    }
+
 }

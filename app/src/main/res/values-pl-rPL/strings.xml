@@ -38,4 +38,5 @@
     <string name="no_drugs_saved">Nie zapisano żadnego leku, skorzystaj z wyszukiwarki, aby dodać lek</string>
     <string name="signout">Wyloguj</string>
     <string name="scan_barcode">Skanuj kod</string>
+    <string name="error_ean_not_correct">Zeskanowany kod nie jest przypisany do żadnego leku. Kod mógł zostać uszkodzony, bądź lek został wycofany ze sprzedaży.</string>
 </resources>

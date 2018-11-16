@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.afollestad.materialdialogs.MaterialDialog
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.drugdetails.DrugDetailsFragment
@@ -39,6 +40,7 @@ class BarcodeScannerFragment : Fragment(), BarcodeScannerContract.View {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        scanner_view.stopScanning()
         presenter.detach()
     }
 
@@ -61,14 +63,30 @@ class BarcodeScannerFragment : Fragment(), BarcodeScannerContract.View {
         progress_indicator.visibility = View.GONE
     }
 
-    override fun showBackgroundText() {
-        textview_background.text = getString(R.string.error_no_drugs_found)
-        textview_background.visibility = View.VISIBLE
+    override fun hideScanner() {
+        scanner_view.stopScanning()
+        scanner_view.visibility = View.INVISIBLE
     }
 
-    override fun hideBackgroundText() {
-        textview_background.text = getString(R.string.type_drug_or_substance_first)
-        textview_background.visibility = View.INVISIBLE
+    override fun showScanner() {
+        scanner_view.startScanning()
+        scanner_view.visibility = View.VISIBLE
+    }
+
+    override fun showDrugNotFoundDialog() {
+        MaterialDialog(this.context!!).apply {
+            title(R.string.error_no_drugs_found)
+            message(R.string.error_ean_not_correct)
+            positiveButton { this.dismiss() }
+        }.show()
+    }
+
+    override fun showConnectionFailedDialog() {
+        MaterialDialog(this.context!!).apply {
+            title(R.string.error)
+            message(R.string.error_connection_failed)
+            positiveButton { this.dismiss() }
+        }.show()
     }
 
     override fun startDetailsFragment(drugModel: DrugModel) {
@@ -79,6 +97,7 @@ class BarcodeScannerFragment : Fragment(), BarcodeScannerContract.View {
             true
         )
     }
+
 
     private fun bindUi() {
         scanner_view.setOnDecodedCallback(presenter)

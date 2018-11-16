@@ -56,4 +56,6 @@
     <string name="error_internal_server_error">An internal server error has occurred. Please try again.</string>
     <string name="error_drug_query_too_short">Please enter at least 3 characters</string>
     <string name="error_no_drugs_found">No drugs found</string>
+    <string name="error_ean_not_correct">Scanned code is not assigned to any known drug. Either the barcode is malformed, or drug has been removed from stores.</string>
+
 </resources>

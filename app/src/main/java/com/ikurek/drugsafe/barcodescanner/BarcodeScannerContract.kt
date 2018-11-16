@@ -11,8 +11,10 @@ interface BarcodeScannerContract {
     interface View : BaseContract.View {
         fun showProgressIndicator()
         fun hideProgressIndicator()
-        fun showBackgroundText()
-        fun hideBackgroundText()
         fun startDetailsFragment(drugModel: DrugModel)
+        fun hideScanner()
+        fun showScanner()
+        fun showDrugNotFoundDialog()
+        fun showConnectionFailedDialog()
     }
 }
