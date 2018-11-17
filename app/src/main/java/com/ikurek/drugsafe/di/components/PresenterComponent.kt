@@ -11,7 +11,6 @@ import com.ikurek.drugsafe.mainactivity.MainPresenter
 import com.ikurek.drugsafe.mydrugs.MyDrugsPresenter
 import com.ikurek.drugsafe.registeractivity.RegisterPresenter
 import com.ikurek.drugsafe.replacementslist.ReplacementListPresenter
-import com.ikurek.drugsafe.savedrug.SaveDrugPresenter
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsPresenter
 import dagger.Component
 
@@ -33,5 +32,4 @@ interface PresenterComponent {
     fun inject(drugDetailsPresenter: DrugDetailsPresenter)
     fun inject(replacementListPresenter: ReplacementListPresenter)
     fun inject(barcodeScannerPresenter: BarcodeScannerPresenter)
-    fun inject(saveDrugPresenter: SaveDrugPresenter)
 }

@@ -14,7 +14,6 @@ interface DrugDetailsContract {
 
     interface View : BaseContract.View {
         fun startSearchReplacementsFragment()
-        fun startSaveDrugFragment()
         fun getDrug(): DrugModel
         fun switchFabMenu()
     }

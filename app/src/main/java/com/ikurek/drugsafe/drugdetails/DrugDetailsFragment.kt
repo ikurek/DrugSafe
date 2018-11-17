@@ -12,7 +12,6 @@ import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.mainactivity.MainActivity
 import com.ikurek.drugsafe.model.DrugModel
 import com.ikurek.drugsafe.replacementslist.ReplacementListFragment
-import com.ikurek.drugsafe.savedrug.SaveDrugFragment
 import kotlinx.android.synthetic.main.fragment_drug_details.*
 import javax.inject.Inject
 
@@ -52,16 +51,6 @@ class DrugDetailsFragment : Fragment(), DrugDetailsContract.View {
         parentActivity.changeFragment(
             ReplacementListFragment.instantiateWithDrugId(drugModel.id),
             getString(R.string.fragment_tag_replacementslist),
-            true
-        )
-    }
-
-    //TODO: Left unused
-    override fun startSaveDrugFragment() {
-        val parentActivity = this.activity as MainActivity
-        parentActivity.changeFragment(
-            SaveDrugFragment.instantiateWithDrugModel(drugModel),
-            getString(R.string.fragment_tag_savedrug),
             true
         )
     }
