@@ -2,6 +2,7 @@ package com.ikurek.drugsafe.drugdetails
 
 import com.ikurek.drugsafe.base.BaseContract
 import com.ikurek.drugsafe.model.DrugModel
+import com.karumi.dexter.listener.single.PermissionListener
 import com.leinardi.android.speeddial.SpeedDialView
 
 interface DrugDetailsContract {
@@ -17,5 +18,8 @@ interface DrugDetailsContract {
         fun getDrug(): DrugModel
         fun switchFabMenu()
         fun openDrugInBrowser()
+        fun openDrugManualDownloadRequest()
+        fun requestStoragePermission(storagePermissionListener: PermissionListener)
+        fun showStoragePermissionDeniedDialog()
     }
 }

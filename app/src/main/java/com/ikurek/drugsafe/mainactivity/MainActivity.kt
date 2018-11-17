@@ -162,6 +162,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
             .check()
     }
 
+    override fun showCameraPermissionDeniedDialog() {
+        MaterialDialog(this).apply {
+            title(R.string.permission_error)
+            message(R.string.error_camera_permission_denied)
+            positiveButton { this.dismiss() }
+        }.show()
+    }
+
     override fun signOut() {
         this.finish()
         Session.signOut(this)

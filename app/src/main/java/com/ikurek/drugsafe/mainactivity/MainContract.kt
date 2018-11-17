@@ -20,5 +20,6 @@ interface MainContract {
         fun updateMainActivityUIByCurrentFragmentTag()
         fun signOut()
         fun requestCameraPermission(cameraPermissionListener: PermissionListener)
+        fun showCameraPermissionDeniedDialog()
     }
 }

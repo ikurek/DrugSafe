@@ -83,14 +83,14 @@ class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSel
         }
 
         override fun onPermissionDenied(response: PermissionDeniedResponse) {
-            //TODO: Handle
+            view?.showCameraPermissionDeniedDialog()
         }
 
         override fun onPermissionRationaleShouldBeShown(
             permission: PermissionRequest,
             token: PermissionToken
         ) {
-            //TODO: Handle
+            token.continuePermissionRequest()
         }
 
     }

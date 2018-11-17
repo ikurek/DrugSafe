@@ -42,4 +42,11 @@
     <string name="error_ean_not_correct">Zeskanowany kod nie jest przypisany do żadnego leku. Kod mógł zostać uszkodzony, bądź lek został wycofany ze sprzedaży.</string>
     <string name="session_expired">Sesja wygasła</string>
     <string name="error_session_expired">Twój token sesji przekroczył maksymalny czas ważności. Zaloguj się ponownie.</string>
+    <string name="manual">Ulotka:</string>
+    <string name="view_in_browser">Otwórz w przeglądarce</string>
+    <string name="permission_error">Błąd uprawnień</string>
+    <string name="download_manual">Pobierz ulotkę</string>
+    <string name="download_started_by_drugsafe">Pobieranie uruchomione przez DrugSafe</string>
+    <string name="error_camera_permission_denied">Odmówiłeś dostępu do aparatu. Bez uprawnień do korzystania z aparatu aplikacja nie może rozpocząć skanowania.</string>
+    <string name="error_storage_permission_denied">Odmówiłeś dostępu do pamięci. Bez uprawnień do korzystania z pamieci wewnętrznej aplikacja nie może rozpocząć pobierania pliku.</string>
 </resources>

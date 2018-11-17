@@ -1,20 +1,27 @@
 package com.ikurek.drugsafe.drugdetails
 
 
+import android.Manifest
+import android.app.DownloadManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.mainactivity.MainActivity
 import com.ikurek.drugsafe.model.DrugModel
 import com.ikurek.drugsafe.replacementslist.ReplacementListFragment
 import com.ikurek.drugsafe.utlis.Web
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.fragment_drug_details.*
 import javax.inject.Inject
 
@@ -70,12 +77,48 @@ class DrugDetailsFragment : Fragment(), DrugDetailsContract.View {
         }
     }
 
+    override fun requestStoragePermission(storagePermissionListener: PermissionListener) {
+        Dexter.withActivity(this.activity)
+            .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .withListener(storagePermissionListener)
+            .check()
+    }
+
     override fun openDrugInBrowser() {
         val openBrowserIntent = Intent(Intent.ACTION_VIEW).apply {
             data = Web.getDrugUriById(drugModel.id)
             Log.d("DrugDetails", "Opening in browser: $data")
         }
         startActivity(openBrowserIntent)
+    }
+
+    override fun openDrugManualDownloadRequest() {
+        val downloadManager =
+            context!!.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        val downloadUri = Web.getDrugManualDownloadUriById(drugModel.id)
+
+        val request = DownloadManager.Request(downloadUri).apply {
+            setDestinationInExternalFilesDir(
+                context,
+                Environment.DIRECTORY_DOWNLOADS,
+                "DrugSafe/Ulotka ${drugModel.name}.pdf"
+            )
+            setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+            setTitle(getString(R.string.manual) + " ${drugModel.name}")
+            setDescription(getString(R.string.download_started_by_drugsafe))
+            setVisibleInDownloadsUi(true)
+        }
+
+        Log.d("DrugDetails", "Downloading: $downloadUri")
+        downloadManager.enqueue(request)
+    }
+
+    override fun showStoragePermissionDeniedDialog() {
+        MaterialDialog(this.context!!).apply {
+            title(R.string.permission_error)
+            message(R.string.error_storage_permission_denied)
+            positiveButton { this.dismiss() }
+        }.show()
     }
 
     override fun getDrug(): DrugModel = this.drugModel

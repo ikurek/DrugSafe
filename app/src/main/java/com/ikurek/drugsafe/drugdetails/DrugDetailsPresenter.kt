@@ -6,6 +6,11 @@ import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.database.AppDatabase
 import com.ikurek.drugsafe.model.DrugModel
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import javax.inject.Inject
@@ -60,6 +65,9 @@ class DrugDetailsPresenter : DrugDetailsContract.Presenter, SpeedDialView.OnActi
             R.id.menu_open_in_browser -> {
                 view?.openDrugInBrowser()
             }
+            R.id.menu_download_manual -> {
+                view?.requestStoragePermission(storagePermissionListener)
+            }
         }
 
         // False closes menu
@@ -84,4 +92,21 @@ class DrugDetailsPresenter : DrugDetailsContract.Presenter, SpeedDialView.OnActi
         }
     }
 
+    private val storagePermissionListener = object : PermissionListener {
+        override fun onPermissionGranted(response: PermissionGrantedResponse) {
+            view?.openDrugManualDownloadRequest()
+        }
+
+        override fun onPermissionDenied(response: PermissionDeniedResponse) {
+            view?.showStoragePermissionDeniedDialog()
+        }
+
+        override fun onPermissionRationaleShouldBeShown(
+            permission: PermissionRequest,
+            token: PermissionToken
+        ) {
+            token.continuePermissionRequest()
+        }
+
+    }
 }
