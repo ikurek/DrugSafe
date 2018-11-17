@@ -149,6 +149,9 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 nav_view.setCheckedItem(R.id.nav_scan)
                 toolbar.title = getString(R.string.scan_barcode)
             }
+            getString(R.string.fragment_tag_savedrug) -> {
+                toolbar.title = getString(R.string.save_drug)
+            }
         }
     }
 

@@ -14,6 +14,8 @@ import com.ikurek.drugsafe.registeractivity.RegisterContract
 import com.ikurek.drugsafe.registeractivity.RegisterPresenter
 import com.ikurek.drugsafe.replacementslist.ReplacementListContract
 import com.ikurek.drugsafe.replacementslist.ReplacementListPresenter
+import com.ikurek.drugsafe.savedrug.SaveDrugContract
+import com.ikurek.drugsafe.savedrug.SaveDrugPresenter
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsContract
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsPresenter
 import dagger.Module
@@ -60,6 +62,11 @@ class PresenterModule {
     @Provides
     fun provideBarcodeScannerPresenter(): BarcodeScannerContract.Presenter {
         return BarcodeScannerPresenter()
+    }
+
+    @Provides
+    fun provideSaveDrugsPresenter(): SaveDrugContract.Presenter {
+        return SaveDrugPresenter()
     }
 
 }

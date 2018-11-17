@@ -1,8 +1,11 @@
 package com.ikurek.drugsafe.drugdetails
 
 import android.content.Context
+import android.util.Log
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
+import com.ikurek.drugsafe.database.AppDatabase
+import com.ikurek.drugsafe.model.DrugModel
 import com.leinardi.android.speeddial.SpeedDialActionItem
 import com.leinardi.android.speeddial.SpeedDialView
 import javax.inject.Inject
@@ -11,6 +14,9 @@ class DrugDetailsPresenter : DrugDetailsContract.Presenter, SpeedDialView.OnActi
 
     @Inject
     lateinit var context: Context
+
+    @Inject
+    lateinit var appDatabase: AppDatabase
 
     var view: DrugDetailsContract.View? = null
 
@@ -41,7 +47,12 @@ class DrugDetailsPresenter : DrugDetailsContract.Presenter, SpeedDialView.OnActi
     override fun onActionSelected(actionItem: SpeedDialActionItem?): Boolean {
         when (actionItem?.id) {
             R.id.menu_save_drug -> {
-                //TODO: Not Implemented
+                saveDrug()
+                view?.switchFabMenu()
+            }
+            R.id.menu_delete_drug -> {
+                deleteDrug()
+                view?.switchFabMenu()
             }
             R.id.menu_find_replacements -> {
                 view?.startSearchReplacementsFragment()
@@ -50,6 +61,24 @@ class DrugDetailsPresenter : DrugDetailsContract.Presenter, SpeedDialView.OnActi
 
         // False closes menu
         return false
+    }
+
+    override fun isDrugSaved(drugModel: DrugModel): Boolean {
+        return appDatabase.drugDAO().getAll().contains(drugModel)
+    }
+
+    private fun saveDrug() {
+        view?.getDrug().let { drug ->
+            appDatabase.drugDAO().save(drug!!)
+            Log.d("DrugDetails", "Saving ${drug.name}")
+        }
+    }
+
+    private fun deleteDrug() {
+        view?.getDrug().let { drug ->
+            appDatabase.drugDAO().delete(drug!!)
+            Log.d("DrugDetails", "Removing ${drug.name}")
+        }
     }
 
 }

@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
+import com.ikurek.drugsafe.drugdetails.DrugDetailsFragment
 import com.ikurek.drugsafe.mainactivity.MainActivity
+import com.ikurek.drugsafe.model.DrugModel
 import com.ikurek.drugsafe.seachdrugs.SearchDrugsFragment
 import kotlinx.android.synthetic.main.fragment_my_drugs.*
 import javax.inject.Inject
@@ -31,6 +35,7 @@ class MyDrugsFragment : Fragment(), MyDrugsContract.View {
         super.onViewCreated(view, savedInstanceState)
         BaseApp.fragmentComponent.inject(this)
         presenter.attach(this)
+        presenter.loadDrugs()
         bindFAB()
     }
 
@@ -44,13 +49,30 @@ class MyDrugsFragment : Fragment(), MyDrugsContract.View {
         BaseApp.currentlyVisibleFragmentTag = getString(R.string.fragment_tag_mydrugs)
     }
 
-    override fun showProgress() {
+
+    override fun updateRecyclerView(adapter: MyDrugsAdapter) {
+        recyclerview.layoutManager = LinearLayoutManager(this.context)
+        recyclerview.addItemDecoration(
+            DividerItemDecoration(
+                this.context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
+        recyclerview.adapter = adapter
+        recyclerview.visibility = View.VISIBLE
     }
 
-    override fun hideProgress() {
+    override fun clearRecyclerView() {
+        recyclerview.visibility = View.INVISIBLE
+        recyclerview.adapter = null
     }
 
-    override fun setItems(items: List<String>) {
+    override fun showBackgroundText() {
+        textview_background.visibility = View.VISIBLE
+    }
+
+    override fun hideBackgroundText() {
+        textview_background.visibility = View.INVISIBLE
     }
 
     override fun startSearchDrugFragment() {
@@ -58,6 +80,15 @@ class MyDrugsFragment : Fragment(), MyDrugsContract.View {
         parentActivity.changeFragment(
             SearchDrugsFragment(),
             getString(R.string.fragment_tag_searchdrugs),
+            true
+        )
+    }
+
+    override fun startDetailsFragment(drugModel: DrugModel) {
+        val parentActivity = this.activity as MainActivity
+        parentActivity.changeFragment(
+            DrugDetailsFragment.instantiateWithDrugModel(drugModel, true),
+            getString(R.string.fragment_tag_drugdetails),
             true
         )
     }

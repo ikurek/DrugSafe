@@ -12,6 +12,7 @@ import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.mainactivity.MainActivity
 import com.ikurek.drugsafe.model.DrugModel
 import com.ikurek.drugsafe.replacementslist.ReplacementListFragment
+import com.ikurek.drugsafe.savedrug.SaveDrugFragment
 import kotlinx.android.synthetic.main.fragment_drug_details.*
 import javax.inject.Inject
 
@@ -55,20 +56,42 @@ class DrugDetailsFragment : Fragment(), DrugDetailsContract.View {
         )
     }
 
+    //TODO: Left unused
+    override fun startSaveDrugFragment() {
+        val parentActivity = this.activity as MainActivity
+        parentActivity.changeFragment(
+            SaveDrugFragment.instantiateWithDrugModel(drugModel),
+            getString(R.string.fragment_tag_savedrug),
+            true
+        )
+    }
+
+    override fun switchFabMenu() {
+        fab_menu.close(true)
+        if (presenter.isDrugSaved(drugModel)) {
+            fab_menu.inflate(R.menu.drug_details_saved_fab)
+        } else {
+            fab_menu.inflate(R.menu.drug_details_unsaved_fab)
+        }
+    }
+
+    override fun getDrug(): DrugModel = this.drugModel
+
     private fun bindRecyclerView() {
         recyclerview.layoutManager = LinearLayoutManager(this.context)
         recyclerview.adapter = DrugDetailsAdapter(drugModel, presenter.getDrugModelFieldMap())
     }
 
     private fun bindFAB() {
-        if (shouldShowFAB) {
-            fab_menu.visibility = View.VISIBLE
-            fab_menu.inflate(R.menu.drug_details_fab)
+        if (presenter.isDrugSaved(drugModel)) {
+            fab_menu.inflate(R.menu.drug_details_saved_fab)
             fab_menu.setOnActionSelectedListener(this.presenter)
         } else {
-            fab_menu.visibility = View.GONE
+            fab_menu.inflate(R.menu.drug_details_unsaved_fab)
+            fab_menu.setOnActionSelectedListener(this.presenter)
         }
     }
+
 
     companion object {
         fun instantiateWithDrugModel(

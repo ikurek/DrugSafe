@@ -1,9 +1,11 @@
 package com.ikurek.drugsafe.model
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.ikurek.drugsafe.database.DataTypeConverter
 
+@Entity(tableName = "drugs")
 data class DrugModel(
     @PrimaryKey
     var id: Long,

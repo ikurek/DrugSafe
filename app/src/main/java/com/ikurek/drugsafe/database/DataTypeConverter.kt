@@ -20,14 +20,25 @@ class DataTypeConverter {
     }
 
     @TypeConverter
-    fun listToString(list: List<String>): String {
+    fun stringListToString(list: List<String>): String {
         return gson.toJson(list)
     }
 
     @TypeConverter
-    fun stringToList(string: String): List<String> {
+    fun stringToStringList(string: String): List<String> {
         return gson.fromJson(string)
     }
+
+    @TypeConverter
+    fun intListToString(list: List<Int>): String {
+        return gson.toJson(list)
+    }
+
+    @TypeConverter
+    fun stringToIntList(string: String): List<Int> {
+        return gson.fromJson(string)
+    }
+
 
     inline fun <reified T> Gson.fromJson(json: String) =
         this.fromJson<T>(json, object : TypeToken<T>() {}.type)

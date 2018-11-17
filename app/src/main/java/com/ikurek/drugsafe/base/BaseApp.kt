@@ -76,6 +76,8 @@ class BaseApp : Application() {
             AppDatabase::class.java,
             "drugsafedb"
         )
+            .allowMainThreadQueries() //BAD DEVELOPER!!!
+            .fallbackToDestructiveMigration() //VERY BAD DEVELOPER
             .build()
     }
 
