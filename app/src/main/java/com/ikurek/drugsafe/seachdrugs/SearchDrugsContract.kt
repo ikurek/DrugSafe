@@ -21,5 +21,6 @@ interface SearchDrugsContract {
         fun showNoDrugsFoundText()
         fun clearRecyclerView()
         fun startDetailsFragment(drugModel: DrugModel)
+        fun showSessionExpiredDialog()
     }
 }

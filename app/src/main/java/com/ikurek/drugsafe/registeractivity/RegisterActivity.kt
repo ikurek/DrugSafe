@@ -57,10 +57,10 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             message(R.string.success_registration)
             positiveButton {
                 it.dismiss()
-                it.ownerActivity?.finish()
+                this@RegisterActivity.finish()
             }
             onDismiss {
-                it.ownerActivity?.finish()
+                this@RegisterActivity.finish()
             }
         }.show()
     }

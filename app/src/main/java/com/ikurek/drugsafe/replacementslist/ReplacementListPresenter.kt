@@ -88,6 +88,10 @@ class ReplacementListPresenter : ReplacementListContract.Presenter {
                             )
                         })
                     }
+                    403 -> {
+                        view?.hideProgressIndicator()
+                        view?.showSessionExpiredDialog()
+                    }
                     404 -> {
                         view?.hideProgressIndicator()
                         view?.showNoDrugsFoundText()

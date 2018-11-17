@@ -17,5 +17,6 @@ interface ReplacementListContract {
         fun updateRecyclerView(adapter: ReplacementListAdapter)
         fun showNoDrugsFoundText()
         fun startDetailsFragment(drugModel: DrugModel)
+        fun showSessionExpiredDialog()
     }
 }

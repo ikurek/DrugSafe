@@ -88,6 +88,10 @@ class SearchDrugsPresenter : SearchDrugsContract.Presenter {
                         view?.hideProgressIndicator()
                         view?.updateRecyclerView(SearchDrugsAdapter(drugs) { itemClicked(it) })
                     }
+                    403 -> {
+                        view?.hideProgressIndicator()
+                        view?.showSessionExpiredDialog()
+                    }
                     404 -> {
                         view?.hideProgressIndicator()
                         view?.showNoDrugsFoundText()

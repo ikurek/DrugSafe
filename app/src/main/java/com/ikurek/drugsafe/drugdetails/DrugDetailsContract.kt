@@ -16,5 +16,6 @@ interface DrugDetailsContract {
         fun startSearchReplacementsFragment()
         fun getDrug(): DrugModel
         fun switchFabMenu()
+        fun openDrugInBrowser()
     }
 }

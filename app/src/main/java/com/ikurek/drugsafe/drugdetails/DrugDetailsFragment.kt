@@ -1,7 +1,9 @@
 package com.ikurek.drugsafe.drugdetails
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.mainactivity.MainActivity
 import com.ikurek.drugsafe.model.DrugModel
 import com.ikurek.drugsafe.replacementslist.ReplacementListFragment
+import com.ikurek.drugsafe.utlis.Web
 import kotlinx.android.synthetic.main.fragment_drug_details.*
 import javax.inject.Inject
 
@@ -21,7 +24,6 @@ class DrugDetailsFragment : Fragment(), DrugDetailsContract.View {
     lateinit var presenter: DrugDetailsContract.Presenter
 
     lateinit var drugModel: DrugModel
-    var shouldShowFAB: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -68,6 +70,14 @@ class DrugDetailsFragment : Fragment(), DrugDetailsContract.View {
         }
     }
 
+    override fun openDrugInBrowser() {
+        val openBrowserIntent = Intent(Intent.ACTION_VIEW).apply {
+            data = Web.getDrugUriById(drugModel.id)
+            Log.d("DrugDetails", "Opening in browser: $data")
+        }
+        startActivity(openBrowserIntent)
+    }
+
     override fun getDrug(): DrugModel = this.drugModel
 
     private fun bindRecyclerView() {
@@ -88,11 +98,9 @@ class DrugDetailsFragment : Fragment(), DrugDetailsContract.View {
 
     companion object {
         fun instantiateWithDrugModel(
-            drugModel: DrugModel,
-            shouldShowFAB: Boolean
+            drugModel: DrugModel
         ): DrugDetailsFragment = DrugDetailsFragment().apply {
             this.drugModel = drugModel
-            this.shouldShowFAB = shouldShowFAB
         }
     }
 

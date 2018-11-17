@@ -25,7 +25,7 @@
     <string name="error_field_required">To pole jest wymagane!</string>
     <string name="error_email_taken">Podany adres email jest już zajęty.</string>
     <string name="error_server_offline">Serwer jest chwilowo niedostępny, proszę spróbować później.</string>
-    <string name="error_passwords_do_not_match">Email lub hasło są błędne. Jeżeli korzystasz z aplikacji po raz pierwszy, zarejestruj się.</string>
+    <string name="error_passwords_do_not_match">Hasła nie są identyczne</string>
     <string name="error_connection_failed">Nie udało się połączyć z serwerem. Sprawdź swoje połączenie internetowe i spróbuj ponownie.</string>
     <string name="error_internal_server_error">Wystąpił błąd serwera, proszę spróbować później.</string>
     <string name="error_drug_query_too_short">Wprowadź minimuum 3 znaki!</string>
@@ -40,4 +40,6 @@
     <string name="signout">Wyloguj</string>
     <string name="scan_barcode">Skanuj kod</string>
     <string name="error_ean_not_correct">Zeskanowany kod nie jest przypisany do żadnego leku. Kod mógł zostać uszkodzony, bądź lek został wycofany ze sprzedaży.</string>
+    <string name="session_expired">Sesja wygasła</string>
+    <string name="error_session_expired">Twój token sesji przekroczył maksymalny czas ważności. Zaloguj się ponownie.</string>
 </resources>

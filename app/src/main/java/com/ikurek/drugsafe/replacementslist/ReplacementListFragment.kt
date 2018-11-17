@@ -8,11 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.ikurek.drugsafe.R
 import com.ikurek.drugsafe.base.BaseApp
 import com.ikurek.drugsafe.drugdetails.DrugDetailsFragment
 import com.ikurek.drugsafe.mainactivity.MainActivity
 import com.ikurek.drugsafe.model.DrugModel
+import com.ikurek.drugsafe.utlis.Session
 import kotlinx.android.synthetic.main.fragment_replacement_list.*
 import javax.inject.Inject
 
@@ -81,10 +84,23 @@ class ReplacementListFragment : Fragment(), ReplacementListContract.View {
         val parentActivity = this.activity as MainActivity
         parentActivity.changeFragment(
             DrugDetailsFragment.instantiateWithDrugModel(
-                drugModel,
-                false
+                drugModel
             ), getString(R.string.fragment_tag_drugdetails), true
         )
+    }
+
+    override fun showSessionExpiredDialog() {
+        MaterialDialog(context!!).apply {
+            title(R.string.session_expired)
+            message(R.string.error_session_expired)
+            positiveButton {
+                it.dismiss()
+                Session.signOut(context)
+            }
+            onDismiss {
+                Session.signOut(context)
+            }
+        }.show()
     }
 
     override fun getWindowToken(): IBinder {

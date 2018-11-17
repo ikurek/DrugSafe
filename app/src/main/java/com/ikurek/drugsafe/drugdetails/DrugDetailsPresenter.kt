@@ -57,6 +57,9 @@ class DrugDetailsPresenter : DrugDetailsContract.Presenter, SpeedDialView.OnActi
             R.id.menu_find_replacements -> {
                 view?.startSearchReplacementsFragment()
             }
+            R.id.menu_open_in_browser -> {
+                view?.openDrugInBrowser()
+            }
         }
 
         // False closes menu

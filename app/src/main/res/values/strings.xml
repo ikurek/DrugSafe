@@ -14,6 +14,8 @@
     <string name="no_drugs_saved">No drugs saved, use search tab to find them</string>
     <string name="save_drug">Save drug</string>
     <string name="delete_drug">Delete drug</string>
+    <string name="session_expired">Session expired</string>
+    <string name="view_in_browser">View in browser</string>
 
     <!-- Fragment tags -->
     <string name="fragment_tag_mydrugs" translatable="false">MyDrugsFragment</string>
@@ -50,14 +52,13 @@
     <string name="error_field_required">This field is required</string>
     <string name="error_email_taken">This email address is already taken. If it is Yours, try logging in.</string>
     <string name="error_server_offline">Server is currently offline, please try again later.</string>
-    <string name="error_passwords_do_not_match">Email and password do not match. If You do not have an account, register
-        first.
-    </string>
+    <string name="error_passwords_do_not_match">Passwords do not match</string>
     <string name="error_connection_failed">Connecting to server failed. Check Your internet connection and try again.
     </string>
     <string name="error_internal_server_error">An internal server error has occurred. Please try again.</string>
     <string name="error_drug_query_too_short">Please enter at least 3 characters</string>
     <string name="error_no_drugs_found">No drugs found</string>
     <string name="error_ean_not_correct">Scanned code is not assigned to any known drug. Either the barcode is malformed, or drug has been removed from stores.</string>
+    <string name="error_session_expired">Your session token has expired. Please, log in again.</string>
 
 </resources>

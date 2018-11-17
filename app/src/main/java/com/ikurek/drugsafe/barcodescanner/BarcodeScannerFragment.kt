@@ -92,7 +92,7 @@ class BarcodeScannerFragment : Fragment(), BarcodeScannerContract.View {
     override fun startDetailsFragment(drugModel: DrugModel) {
         val parentActivity = this.activity as MainActivity
         parentActivity.changeFragment(
-            DrugDetailsFragment.instantiateWithDrugModel(drugModel, true),
+            DrugDetailsFragment.instantiateWithDrugModel(drugModel),
             getString(R.string.fragment_tag_drugdetails),
             true
         )

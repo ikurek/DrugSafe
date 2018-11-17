@@ -10,4 +10,9 @@
         android:id="@+id/menu_find_replacements"
         android:icon="@drawable/ic_search_replace"
         android:title="@string/find_replacement_drugs" />
+
+    <item
+        android:id="@+id/menu_open_in_browser"
+        android:icon="@drawable/ic_open_in_browser"
+        android:title="@string/view_in_browser" />
 </menu>
