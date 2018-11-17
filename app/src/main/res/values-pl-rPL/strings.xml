@@ -10,6 +10,7 @@
     <string name="type_drug_or_substance_first">Wyszukaj lek, podając nazwę handlową lub substancję aktywną</string>
     <string name="find_replacement_drugs">Znajdź zamienniki</string>
     <string name="save_drug">Zapisz lek</string>
+    <string name="delete_drug">Usuń lek</string>
     <string name="registration">Rejestracja</string>
     <string name="register">Utwórz konto</string>
     <string name="signin">Zaloguj się</string>

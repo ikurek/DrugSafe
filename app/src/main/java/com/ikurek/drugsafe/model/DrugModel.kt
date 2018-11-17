@@ -23,7 +23,7 @@ data class DrugModel(
     companion object {
         fun toIndexedStringMap(drugModel: DrugModel): List<Pair<String, String>> {
 
-            var map = mutableListOf<Pair<String, String>>()
+            val map = mutableListOf<Pair<String, String>>()
             var substancesString = ""
 
             map.add(Pair("id", drugModel.id.toString()))
@@ -78,7 +78,7 @@ data class DrugModel(
             )
 
             for (substance in drugModel.substances!!.iterator()) {
-                substancesString = "${substancesString}, ${substance}"
+                substancesString = "$substancesString, $substance"
             }
 
             map.add(Pair("substances", substancesString.drop(2)))

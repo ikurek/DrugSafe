@@ -11,11 +11,12 @@ import kotlinx.android.synthetic.main.row_drug_details.view.*
 class DrugDetailsAdapter(val drug: DrugModel, val drugModelFieldMap: Map<String, String>) :
     RecyclerView.Adapter<DrugDetailsAdapter.ViewHolder>() {
 
-    val map = DrugModel.toIndexedStringMap(drug)
+    private val map = DrugModel.toIndexedStringMap(drug)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.row_drug_details, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.row_drug_details, parent, false)
         return ViewHolder(view)
     }
 

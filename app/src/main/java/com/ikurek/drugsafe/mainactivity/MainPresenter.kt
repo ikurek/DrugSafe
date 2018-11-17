@@ -24,7 +24,7 @@ class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSel
     @Inject
     lateinit var context: Context
 
-    var myDrugsFragment = MyDrugsFragment()
+    private var myDrugsFragment = MyDrugsFragment()
 
     override fun attach(view: MainContract.View) {
         Log.d("MainPresenter", "Attached")
@@ -42,7 +42,11 @@ class MainPresenter : MainContract.Presenter, NavigationView.OnNavigationItemSel
 
         when (item.itemId) {
             R.id.nav_my_drugs -> {
-                view?.changeFragment(myDrugsFragment, context.getString(R.string.fragment_tag_mydrugs), true)
+                view?.changeFragment(
+                    myDrugsFragment,
+                    context.getString(R.string.fragment_tag_mydrugs),
+                    true
+                )
             }
             R.id.nav_search_drugs -> {
                 view?.changeFragment(

@@ -71,7 +71,10 @@ class SearchDrugsPresenter : SearchDrugsContract.Presenter {
                 view?.hideBackgroundText()
             }
 
-            override fun onResponse(call: Call<List<DrugModel>>, response: Response<List<DrugModel>>) {
+            override fun onResponse(
+                call: Call<List<DrugModel>>,
+                response: Response<List<DrugModel>>
+            ) {
                 Log.d("SearchDrugs", "Success. Response: $response ")
 
                 when (response.code()) {

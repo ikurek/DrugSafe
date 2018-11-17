@@ -16,12 +16,6 @@ interface DrugsApi {
     )
             : Call<List<DrugModel>>
 
-    @GET("/api/drugs/{id}")
-    fun getDrugById(
-        @Path("id") id: Long
-    )
-            : Call<DrugModel>
-
     @GET("/api/replacements/{id}")
     fun getDrugReplacementsById(
         @Header("Authorization") token: String,

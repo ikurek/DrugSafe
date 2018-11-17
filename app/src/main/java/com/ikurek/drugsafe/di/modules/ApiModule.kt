@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ApiModule(val usersApi: UsersApi, val drugsApi: DrugsApi) {
+class ApiModule(private val usersApi: UsersApi, val drugsApi: DrugsApi) {
 
     @Provides
     fun provideUsersApi(): UsersApi = usersApi

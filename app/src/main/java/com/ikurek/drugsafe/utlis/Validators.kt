@@ -13,7 +13,7 @@ object Validators {
     }
 
     fun isPasswordMatching(password: String, repeatPassword: String): Boolean {
-        return password.equals(repeatPassword)
+        return password == repeatPassword
     }
 
     fun isDrugQueryValid(query: String): Boolean {

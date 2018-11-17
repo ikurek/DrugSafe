@@ -33,7 +33,8 @@ class RegisterPresenter : RegisterContract.Presenter {
     override fun handleRegisterButton(email: String, password: String, repeatPassword: String) {
 
         // Hide keyboard
-        val inputMethodManager: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager: InputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.getWindowToken(), 0)
 
         //Show progress

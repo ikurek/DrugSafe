@@ -23,7 +23,7 @@ class BaseApp : Application() {
         var currentlyVisibleFragmentTag: String = ""
     }
 
-    lateinit var usersApi: UsersApi
+    private lateinit var usersApi: UsersApi
     lateinit var drugsApi: DrugsApi
     lateinit var sharedPreferences: SharedPreferences
     lateinit var database: AppDatabase
@@ -39,16 +39,16 @@ class BaseApp : Application() {
 
     private fun buildDagger() {
         presenterComponent = DaggerPresenterComponent.builder()
-                .contextModule(ContextModule(applicationContext))
+            .contextModule(ContextModule(applicationContext))
             .apiModule(ApiModule(usersApi, drugsApi))
             .sharedPreferencesModule(SharedPreferencesModule(sharedPreferences))
             .databaseModule(DatabaseModule(database))
-                .build()
+            .build()
         activityComponent = DaggerActivityComponent.builder()
             .contextModule(ContextModule(applicationContext))
             .presenterModule(PresenterModule())
             .sharedPreferencesModule(SharedPreferencesModule(sharedPreferences))
-                .build()
+            .build()
         fragmentComponent = DaggerFragmentComponent.builder()
             .contextModule(ContextModule(applicationContext))
             .presenterModule(PresenterModule())
@@ -58,16 +58,17 @@ class BaseApp : Application() {
 
     private fun buildRetrofit() {
         val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://ikurek.pl:8444")
-                .build()
+            .build()
 
         usersApi = retrofit.create(UsersApi::class.java)
         drugsApi = retrofit.create(DrugsApi::class.java)
     }
 
     private fun buildSharedPreferences() {
-        sharedPreferences = applicationContext.getSharedPreferences("drugsafesp", Context.MODE_PRIVATE)
+        sharedPreferences =
+                applicationContext.getSharedPreferences("drugsafesp", Context.MODE_PRIVATE)
     }
 
     private fun buildDatabase() {

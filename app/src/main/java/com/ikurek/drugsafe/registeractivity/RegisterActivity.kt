@@ -98,7 +98,11 @@ class RegisterActivity : AppCompatActivity(), RegisterContract.View {
             password_input_layout.error = null
         }
 
-        if (!Validators.isPasswordMatching(password_text.text.toString(), repeat_password_text.text.toString())) {
+        if (!Validators.isPasswordMatching(
+                password_text.text.toString(),
+                repeat_password_text.text.toString()
+            )
+        ) {
             repeat_password_input_layout.error = getString(R.string.error_passwords_do_not_match)
             return false
         } else {

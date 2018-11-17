@@ -22,7 +22,8 @@
             android:singleLine="true"
             app:layout_constraintEnd_toStartOf="@+id/search_drugs_button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+        android:importantForAutofill="no"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
             android:id="@+id/search_drugs_button"
@@ -32,6 +33,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="false"
             android:clickable="true"
+        android:focusable="true"
             android:cropToPadding="false"
         android:src="@drawable/ic_action_search"
         android:tint="@android:color/black"

@@ -68,26 +68,26 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun changeFragment(fragment: Fragment, tag: String, addToBackstack: Boolean) {
 
         if (BaseApp.currentlyVisibleFragmentTag != tag) {
-            Log.d("MainActivity", "Fragment ${BaseApp.currentlyVisibleFragmentTag} -> ${tag}")
+            Log.d("MainActivity", "Fragment ${BaseApp.currentlyVisibleFragmentTag} -> $tag")
 
 
             // Swap fragment with/without backstack
             if (addToBackstack) {
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_frame, fragment)
-                        .addToBackStack(tag)
-                        .commit()
+                    .replace(R.id.fragment_frame, fragment)
+                    .addToBackStack(tag)
+                    .commit()
             } else {
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_frame, fragment)
-                        .commit()
+                    .replace(R.id.fragment_frame, fragment)
+                    .commit()
             }
 
             // Save fragment tag as current
             BaseApp.currentlyVisibleFragmentTag = tag
 
         } else {
-            Log.d("MainActivity", "Fragment ${BaseApp.currentlyVisibleFragmentTag} == ${tag}")
+            Log.d("MainActivity", "Fragment ${BaseApp.currentlyVisibleFragmentTag} == $tag")
         }
 
         // Update UI elements
@@ -121,10 +121,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         MaterialDialog(this)
             .title(R.string.dialog_exit_title)
             .message(R.string.dialog_exit_body)
-                .positiveButton {
-                    this.finishAffinity()
-                    BaseApp.currentlyVisibleFragmentTag = ""
-                }
+            .positiveButton {
+                this.finishAffinity()
+                BaseApp.currentlyVisibleFragmentTag = ""
+            }
             .negativeButton { dialog -> dialog.dismiss() }
             .show()
     }

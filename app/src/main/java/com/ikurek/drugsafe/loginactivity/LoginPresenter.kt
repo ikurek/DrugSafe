@@ -38,7 +38,8 @@ class LoginPresenter : LoginContract.Presenter {
 
     override fun handleLoginButton(email: String, password: String) {
         // Hide keyboard
-        val inputMethodManager: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager: InputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.getWindowToken(), 0)
 
         //Show progress

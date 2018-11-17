@@ -28,7 +28,11 @@ class SearchDrugsFragment : Fragment(), SearchDrugsContract.View {
         BaseApp.fragmentComponent.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_search_drugs, container, false)
     }
 
@@ -51,7 +55,12 @@ class SearchDrugsFragment : Fragment(), SearchDrugsContract.View {
 
     override fun updateRecyclerView(adapter: SearchDrugsAdapter) {
         recyclerview.layoutManager = LinearLayoutManager(this.context)
-        recyclerview.addItemDecoration(DividerItemDecoration(this.context, LinearLayoutManager.VERTICAL))
+        recyclerview.addItemDecoration(
+            DividerItemDecoration(
+                this.context,
+                LinearLayoutManager.VERTICAL
+            )
+        )
         recyclerview.adapter = adapter
         recyclerview.visibility = View.VISIBLE
     }

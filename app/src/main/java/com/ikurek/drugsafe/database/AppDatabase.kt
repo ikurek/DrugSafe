@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.ikurek.drugsafe.model.DrugModel
 
-@Database(entities = arrayOf(DrugModel::class), version = 3)
+@Database(entities = [DrugModel::class], version = 3)
 @TypeConverters(DataTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun drugDAO(): DrugDAO
